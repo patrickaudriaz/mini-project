@@ -2,43 +2,85 @@ import numpy as np
 import pandas as pd
 from sklearn.utils import shuffle
 
-"""
-PROTOCOLS = {
-        'proto1': {'train': range(0, 30), 'test': range(30, 50)},
-        'proto2': {'train': range(20, 50), 'test': range(0, 20)},
-        }
-"""
+# Root path of the original data folder
+DATASET_PATH = "dataset/"
 
+def getFeaturesNames():
+    """
+    TODO: useless?
+    Get the features names of the dataset
 
-def genCSV():
-    # turn txt files into usable csv
-    return 0
+    Returns
+    -------
+
+    array : features
+
+    """
+
+    with open(DATASET_PATH + "features.txt", 'r') as f:
+        features = [row.replace('\n', '').split(' ')[1] for row in f]
+
+    return features
+
+def getDatasetSplit(split="train"):
+    """
+    Get data and ground-truth of selected split
+
+    Parameters
+    ----------
+
+    split : str
+        split (train or test) to return
+
+    Returns
+    -------
+
+    data : array
+        all the data of the split
+    labels: array
+        all the corresponding labels (ground-truth)
+
+    """
+
+    # Load data
+    with open(DATASET_PATH + split + "/X_" + split + ".txt", 'r') as f:
+        data = np.array([row.replace('  ', ' ').strip().split(' ') for row in f])
+
+    # Load labels
+    with open(DATASET_PATH + split + "/y_" + split + ".txt", 'r') as f:
+        labels = np.array([row.replace('\n', '') for row in f], dtype=int)
+        
+        # Add column's label
+        # labels = np.vstack(("Activity", labels))
+    
+    # Load features names
+    # features = getFeaturesNames()
+
+    # Stack columns names to the data
+    # data = np.vstack((features, data))
+
+    return data, labels
 
 
 def load():
-    data = pd.read_csv("./data/data.csv")
-    # train = pd.read_csv("./data/train.csv")
-    # test = pd.read_csv("./data/test.csv")
-    return data
+    """
+    Get the dataset and the corresponding labels split
+    into a training and a testing set
 
+    Returns
+    -------
 
-def splitData(data, train_size=0.8):
-    random_seed = 42
-    train = shuffle(
-        data.sample(frac=train_size, random_state=random_seed), random_state=random_seed
-    )
-    test = shuffle(data.drop(train.index), random_state=random_seed)
+    train_data : array
+    train_labels: array
+    test_data : array
+    test_labels: array
 
-    return train, test
+    """
 
+    # Get training data
+    train_data, train_labels = getDatasetSplit("train")
 
-def getLabels(data):
-    # Seperating Predictors and Outcome values from train and test sets
-    Y_label = data.Activity.values.astype(object)
-    return Y_label
+    # Get testing data
+    test_data, test_labels = getDatasetSplit("test")
 
-
-def dropLabels(data):
-    X = pd.DataFrame(data.drop(["Activity", "subject"], axis=1))
-    return X
-
+    return train_data, train_labels, test_data, test_labels

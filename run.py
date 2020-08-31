@@ -7,52 +7,48 @@ import analysis
 
 
 def main():
-    data = database.load()
-    train, test = database.splitData(data)
 
+    # TODO: Required? Need a refactor
     # Frequency distribution of classes"
-    train_outcome = pd.crosstab(index=train["Activity"], columns="count")
-    print("\n")
-    print(train_outcome)
+    # train_outcome = pd.crosstab(index=train["Activity"], columns="count")
+    # print("\n")
+    # print(train_outcome)
 
-    X_train = database.dropLabels(train)
-    Y_train_label = database.getLabels(train)
+    # Load data and ground-truth
+    train_data, train_labels, test_data, test_labels = database.load()
+    train_labels = train_labels.ravel()
 
-    X_test = database.dropLabels(test)
-    Y_test_label = database.getLabels(test)
+    # Standardize training and testing set
+    # TODO: verify what is required
+    train_data = preprocessor.standardizeTrain(train_data)
+    test_data = preprocessor.standardizeTrain(test_data)
 
     # Dimension of Train and Test set
-    print("\nDimension of Train set", X_train.shape)
-    print("Dimension of Test set", X_test.shape, "\n")
+    print("\nDimension of training set", train_data.shape)
+    print("Dimension of testing set", test_data.shape, "\n")
 
-    num_cols = X_train._get_numeric_data().columns
-    print("Number of numeric features:", num_cols.size)
-
-    # Transforming non numerical labels into numerical labels
-    Y_train, encoder_train = preprocessor.labelEncoder(Y_train_label)
-    Y_test, encoder_test = preprocessor.labelEncoder(Y_test_label)
-
-    # Standardize the Train and Test feature set
-    X_train_scaled = preprocessor.standardizeTrain(X_train)
-    X_test_scaled = preprocessor.standardizeTrain(X_test)
+    # TODO: useful? I do not think so
+    num_cols = train_data.shape[1]
+    print("Number of numeric features:", num_cols)
 
     # Training SVM model using radial kernel
     kernel = "rbf"
     gamma = 0.001
     C = 1000
 
-    model = algorithm.train(X_train_scaled, Y_train, kernel, gamma, C)
+    # Training
+    model = algorithm.train(train_data, train_labels, kernel, gamma, C)
 
-    Y_pred = algorithm.predict(X_test_scaled, model)
-    Y_pred_label = preprocessor.labelDecoder(Y_pred, encoder_test)
+    predictions = algorithm.predict(test_data, model)
 
-    analysis.getScore(model, X_train_scaled, Y_train, X_test_scaled, Y_test)
+    # Get score
+    analysis.getScore(model, train_data, train_labels, test_data, test_labels)
 
     # Confusion Matrix  and Accuracy Score
-    analysis.confusionMatrix(Y_test_label, Y_pred_label)
+    analysis.confusionMatrix(test_labels, predictions)
 
     # Classification report
-    analysis.classificationReport(Y_test_label, Y_pred_label)
+    analysis.classificationReport(test_labels, predictions)
 
 
 if __name__ == "__main__":
