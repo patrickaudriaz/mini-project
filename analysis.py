@@ -1,5 +1,7 @@
-from sklearn.metrics import confusion_matrix, classification_report
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
+from sklearn.metrics import confusion_matrix, classification_report
 
 def getScore(model, X_train, Y_train, X_test, Y_test):
     print("\n")

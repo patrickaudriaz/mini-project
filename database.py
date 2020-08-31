@@ -1,6 +1,10 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import numpy as np
-import pandas as pd
-from sklearn.utils import shuffle
+import logging
+
+logging.basicConfig(level=logging.INFO)
 
 # Root path of the original data folder
 DATASET_PATH = "dataset/"
@@ -76,11 +80,14 @@ def load():
     test_labels: array
 
     """
+    logging.info(f"Starting dataset loading...")
 
     # Get training data
     train_data, train_labels = getDatasetSplit("train")
 
     # Get testing data
     test_data, test_labels = getDatasetSplit("test")
+
+    logging.info(f"Dataset loaded.")
 
     return train_data, train_labels, test_data, test_labels

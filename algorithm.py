@@ -1,5 +1,7 @@
-from sklearn.svm import SVC
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
+from sklearn.svm import SVC
 
 def train(X, Y, kernel, gamma, C):
     model = SVC(kernel=kernel, gamma=gamma, C=C)

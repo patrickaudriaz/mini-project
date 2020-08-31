@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from sklearn import preprocessing
 from sklearn.preprocessing import StandardScaler
 
