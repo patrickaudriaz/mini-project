@@ -1,7 +1,6 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from sklearn.utils import shuffle
 from sklearn.svm import SVC
 from sklearn.metrics import confusion_matrix, classification_report
 from sklearn import preprocessing
