@@ -7,7 +7,13 @@ def labelEncoder(data_label):
     encoder.fit(data_label)
     Y = encoder.transform(data_label)
 
-    return Y
+    return Y, encoder
+
+
+def labelDecoder(data, encoder):
+    Y_pred_label = list(encoder.inverse_transform(data))
+
+    return Y_pred_label
 
 
 def standardizeTrain(data):

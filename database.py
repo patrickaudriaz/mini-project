@@ -2,15 +2,18 @@ import numpy as np
 import pandas as pd
 from sklearn.utils import shuffle
 
-'''
+"""
 PROTOCOLS = {
         'proto1': {'train': range(0, 30), 'test': range(30, 50)},
         'proto2': {'train': range(20, 50), 'test': range(0, 20)},
         }
-'''
+"""
+
 
 def genCSV():
-    # turn txt files into usable csv 
+    # turn txt files into usable csv
+    return 0
+
 
 def load():
     data = pd.read_csv("./data/data.csv")
@@ -19,9 +22,11 @@ def load():
     return data
 
 
-def split_data(data, train_size=0.8):
+def splitData(data, train_size=0.8):
     random_seed = 42
-    train = shuffle(data.sample(train_size, random_state=random_seed), random_seed)
+    train = shuffle(
+        data.sample(frac=train_size, random_state=random_seed), random_state=random_seed
+    )
     test = shuffle(data.drop(train.index), random_state=random_seed)
 
     return train, test
