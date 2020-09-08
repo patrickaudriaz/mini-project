@@ -6,23 +6,19 @@ import pandas as pd
 import database
 import algorithm
 import analysis
+import argparse
 
 
-def main():
+def main(args):
 
     # Load data and ground-truth
     train_data, train_labels, test_data, test_labels = database.load(
-                                                        standardized=True,
-                                                        printSize=True)
+        standardized=True, printSize=True
+    )
     train_labels = train_labels.ravel()
 
-    # Training SVM model using radial kernel
-    kernel = "rbf"
-    gamma = 0.001
-    C = 1000
-
     # Training
-    model = algorithm.train(train_data, train_labels, kernel, gamma, C)
+    model = algorithm.train(train_data, train_labels, args)
 
     predictions = algorithm.predict(test_data, model)
 
@@ -36,5 +32,32 @@ def main():
     analysis.classificationReport(test_labels, predictions)
 
 
+def get_args():
+    parser = argparse.ArgumentParser(
+        "Train using a Support Vector Machine (SVM) model or a Random Forest (RF) model. You can also train with (very slow) or without doing Grid Search for performing hyper parameter tuning"
+    )
+    parser.add_argument(
+        "-model",
+        type=str,
+        default="svm",
+        help="Use SVM or RF ? --> svm [default] or rf",
+        dest="model",
+    )
+    parser.add_argument(
+        "-gridsearch",
+        type=str,
+        default="n",
+        help="Do Grid Search ? --> y or n [default]",
+        dest="gridsearch",
+    )
+
+    args = parser.parse_args()
+
+    return args
+
+
 if __name__ == "__main__":
-    main()
+    args = get_args()
+    print("\nUsing arguments --> ", args, "\n")
+    main(args)
+
