@@ -1,35 +1,41 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from sklearn import preprocessing
 from sklearn.preprocessing import StandardScaler
+import logging
 
+def standardize(train_data, test_data):
+    """
+    Standardize training and testing data
 
-def labelEncoder(data_label):
-    encoder = preprocessing.LabelEncoder()
-    encoder.fit(data_label)
-    Y = encoder.transform(data_label)
+    Parameters
+    ----------
 
-    return Y, encoder
+    train_data : array
+        Data on which to calculate the standardization parameters.
+        The standardization is also applied on this subset.
+    test_data : array
+        Test subset on which to apply the standardization.
 
+    Returns
+    -------
 
-def labelDecoder(data, encoder):
-    Y_pred_label = list(encoder.inverse_transform(data))
+    train_data : array
+        Standardized training data
+    test_data : array
+        Standardized testing data
 
-    return Y_pred_label
+    """
 
-
-def standardizeTrain(data):
+    # Instantiate scikit standard scaler
     scaler = StandardScaler()
-    # analyze method
-    X_train_scaled = scaler.fit_transform(data)
+    
+    # Fit and standardize on training data
+    train_data_std = scaler.fit_transform(train_data)
 
-    return X_train_scaled
+    # Standardize testing data
+    test_data_std = scaler.transform(test_data)
 
+    logging.info(f"Dataset standardized.")
 
-def standardizeTest(data):
-    scaler = StandardScaler()
-    # analyze method
-    X_test_scaled = scaler.transform(data)
-
-    return X_test_scaled
+    return train_data_std, test_data_std

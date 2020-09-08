@@ -66,10 +66,16 @@ def getDatasetSplit(split="train"):
     return data, labels
 
 
-def load():
+def load(standardized=False, printSize=False):
     """
     Get the dataset and the corresponding labels split
     into a training and a testing set
+
+    Parameters
+    ----------
+
+    standardized : bool
+        standardize the data before returning them or not
 
     Returns
     -------
@@ -89,5 +95,16 @@ def load():
     test_data, test_labels = getDatasetSplit("test")
 
     logging.info(f"Dataset loaded.")
+
+    # Print size if requested
+    if printSize:
+        logging.info(f"---Train samples: {train_data.shape[0]}")
+        logging.info(f"---Test samples: {test_data.shape[0]}")
+
+    # Standardization if required
+    if standardized:
+        from preprocessor import standardize
+
+        train_data, test_data = standardize(train_data, test_data)
 
     return train_data, train_labels, test_data, test_labels
