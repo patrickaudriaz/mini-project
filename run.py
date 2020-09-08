@@ -7,6 +7,7 @@ import database
 import algorithm
 import analysis
 import argparse
+import evaluator
 
 
 def main(args):
@@ -22,14 +23,8 @@ def main(args):
 
     predictions = algorithm.predict(test_data, model)
 
-    # Get score
-    analysis.getScore(model, train_data, train_labels, test_data, test_labels)
-
-    # Confusion Matrix  and Accuracy Score
-    analysis.confusionMatrix(test_labels, predictions)
-
-    # Classification report
-    analysis.classificationReport(test_labels, predictions)
+    # Evaluate the predictions
+    evaluator.evaluate(predictions, test_labels)
 
 
 def get_args():
