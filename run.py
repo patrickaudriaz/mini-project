@@ -2,11 +2,10 @@
 # -*- coding: utf-8 -*-
 
 import pandas as pd
+import argparse
 
 import database
 import algorithm
-import analysis
-import argparse
 import evaluator
 
 
