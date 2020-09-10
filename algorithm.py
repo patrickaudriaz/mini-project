@@ -12,10 +12,33 @@ logging.basicConfig(level=logging.INFO)
 
 
 def train(X, Y, args):
+    """
+    Train a model given the arguments, the dataset and 
+    the corresponding labels (ground-truth)
 
+    Parameters
+    ----------
+
+    X : array
+        features of the dataset
+    Y : array
+        corresponding labels
+    args : dict
+        arguments to prepare the model
+
+    Returns
+    -------
+
+    model : object
+        trained model
+
+    """
+
+    # SVM model selected
     if args.model == "svm":
         logging.info(f"Training SVM model...")
 
+        # Using predefined parameters
         if args.gridsearch == "n":
             logging.info(f"Using predefined parameters.")
 
@@ -29,6 +52,7 @@ def train(X, Y, args):
 
             return svm_model
 
+        # Grid search
         else:
             logging.info(f"Doing grid search, it may take a while...")
 
@@ -56,8 +80,11 @@ def train(X, Y, args):
 
             return svm_model
 
+    # Random forest model selected
     else:
         logging.info(f"Training RF model...")
+
+        # Using predefined parameters
         if args.gridsearch == "n":
             logging.info(f"Using predefined parameters.")
 
@@ -81,6 +108,7 @@ def train(X, Y, args):
 
             return rf_model
 
+        # Grid search
         else:
             logging.info(f"Doing grid search, it may take a while...")
 
@@ -111,6 +139,24 @@ def train(X, Y, args):
 
 
 def predict(X, model):
+    """
+    Predict labels given the features and the trained model
+
+    Parameters
+    ----------
+
+    X : array
+        features to predict on
+    model : object
+        trained model
+
+    Returns
+    -------
+
+    predictions : array
+        Array with the predicted labels
+
+    """
     Y_pred = model.predict(X)
 
     return Y_pred
