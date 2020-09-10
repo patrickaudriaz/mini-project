@@ -36,23 +36,6 @@ def transformToTextLabels(labels):
             
     return labels
 
-def getFeaturesNames():
-    """
-    TODO: useless?
-    Get the features names of the dataset
-
-    Returns
-    -------
-
-    array : features
-
-    """
-
-    with open(DATASET_PATH + "features.txt", 'r') as f:
-        features = [row.replace('\n', '').split(' ')[1] for row in f]
-
-    return features
-
 def getDatasetSplit(split="train"):
     """
     Get data and ground-truth of selected split
@@ -80,15 +63,6 @@ def getDatasetSplit(split="train"):
     # Load labels
     with open(DATASET_PATH + split + "/y_" + split + ".txt", 'r') as f:
         labels = np.array([row.replace('\n', '') for row in f], dtype=int)
-        
-        # Add column's label
-        # labels = np.vstack(("Activity", labels))
-    
-    # Load features names
-    # features = getFeaturesNames()
-
-    # Stack columns names to the data
-    # data = np.vstack((features, data))
 
     return data, labels
 
