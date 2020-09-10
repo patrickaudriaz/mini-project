@@ -6,6 +6,10 @@ import argparse
 
 import database
 import algorithm
+<<<<<<< HEAD
+=======
+import argparse
+>>>>>>> training
 import evaluator
 
 
@@ -19,6 +23,12 @@ def main(args):
 
     # Training
     model = algorithm.train(train_data, train_labels, args)
+
+    # Print scores on train and test sets
+    print("\n")
+    print("Training set accuracy : %f" % model.score(train_data, train_labels))
+    print("Testing  set accuracy : %f" % model.score(test_data, test_labels))
+    print("\n")
 
     predictions = algorithm.predict(test_data, model)
 
