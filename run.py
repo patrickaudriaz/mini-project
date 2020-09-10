@@ -3,12 +3,14 @@
 
 import pandas as pd
 import argparse
+import logging
 
 import database
 import algorithm
 import argparse
 import evaluator
 
+logging.basicConfig(level=logging.INFO)
 
 def main(args):
 
@@ -21,11 +23,9 @@ def main(args):
     # Training
     model = algorithm.train(train_data, train_labels, args)
 
-    # Print scores on train and test sets
-    print("\n")
-    print("Training set accuracy : %f" % model.score(train_data, train_labels))
-    print("Testing  set accuracy : %f" % model.score(test_data, test_labels))
-    print("\n")
+    # Logging scores on train and test sets
+    logging.info("---Training set accuracy: %f" % model.score(train_data, train_labels))
+    logging.info("---Testing  set accuracy: %f" % model.score(test_data, test_labels))
 
     predictions = algorithm.predict(test_data, model)
 
@@ -66,6 +66,7 @@ def get_args():
 
 if __name__ == "__main__":
     args = get_args()
-    print("\nUsing arguments --> ", args, "\n")
+    logging.info(f"Using arguments: {args}")
+
     main(args)
 

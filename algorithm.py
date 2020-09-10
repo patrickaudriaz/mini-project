@@ -14,10 +14,10 @@ logging.basicConfig(level=logging.INFO)
 def train(X, Y, args):
 
     if args.model == "svm":
-        logging.info(f"Training SVM model")
+        logging.info(f"Training SVM model...")
 
         if args.gridsearch == "n":
-            logging.info(f"No grid search...")
+            logging.info(f"Using predefined parameters.")
 
             # Training SVM model using radial kernel and predefined parameters
             kernel = "rbf"
@@ -52,14 +52,14 @@ def train(X, Y, args):
             svm_model = GridSearchCV(SVC(), params_grid, cv=3, verbose=10, n_jobs=-1)
             svm_model.fit(X, Y)
 
-            print("Using hyperparameters --> \n", svm_model.best_params_)
+            logging.info(f"Using hyperparameters: {svm_model.best_params_}")
 
             return svm_model
 
     else:
-        logging.info(f"Training RF model")
+        logging.info(f"Training RF model...")
         if args.gridsearch == "n":
-            logging.info(f"No grid search...")
+            logging.info(f"Using predefined parameters.")
 
             # Training RF model using predefined parameters
             n_estimators = 50
@@ -105,7 +105,7 @@ def train(X, Y, args):
             )
             rf_model.fit(X, Y)
 
-            print("Using hyperparameters --> \n", rf_model.best_params_)
+            logging.info(f"Using hyperparameters: {rf_model.best_params_}")
 
             return rf_model
 
