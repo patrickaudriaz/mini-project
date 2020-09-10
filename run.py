@@ -30,7 +30,7 @@ def main(args):
     predictions = algorithm.predict(test_data, model)
 
     # Evaluate the predictions
-    evaluator.evaluate(predictions, test_labels)
+    evaluator.evaluate(predictions, test_labels, args.output_folder, args.model, model)
 
 
 def get_args():
@@ -50,6 +50,13 @@ def get_args():
         default="n",
         help="Do Grid Search ? --> y or n [default]",
         dest="gridsearch",
+    )
+    parser.add_argument(
+        "-output-folder",
+        type=str,
+        default="results",
+        help="Path where to store the evaluation results (created if does not exist)",
+        dest="output_folder",
     )
 
     args = parser.parse_args()
