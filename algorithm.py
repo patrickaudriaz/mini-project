@@ -12,12 +12,35 @@ logging.basicConfig(level=logging.INFO)
 
 
 def train(X, Y, args):
+    """
+    Train a model given the arguments, the dataset and 
+    the corresponding labels (ground-truth)
 
+    Parameters
+    ----------
+
+    X : array
+        features of the dataset
+    Y : array
+        corresponding labels
+    args : dict
+        arguments to prepare the model
+
+    Returns
+    -------
+
+    model : object
+        trained model
+
+    """
+
+    # SVM model selected
     if args.model == "svm":
-        logging.info(f"Training SVM model")
+        logging.info(f"Training SVM model...")
 
+        # Using predefined parameters
         if args.gridsearch == "n":
-            logging.info(f"No grid search...")
+            logging.info(f"Using predefined parameters.")
 
             # Training SVM model using radial kernel and predefined parameters
             kernel = "rbf"
@@ -29,6 +52,7 @@ def train(X, Y, args):
 
             return svm_model
 
+        # Grid search
         else:
             logging.info(f"Doing grid search, it may take a while...")
 
@@ -52,14 +76,17 @@ def train(X, Y, args):
             svm_model = GridSearchCV(SVC(), params_grid, cv=3, verbose=10, n_jobs=-1)
             svm_model.fit(X, Y)
 
-            print("Using hyperparameters --> \n", svm_model.best_params_)
+            logging.info(f"Using hyperparameters: {svm_model.best_params_}")
 
             return svm_model
 
+    # Random forest model selected
     else:
-        logging.info(f"Training RF model")
+        logging.info(f"Training RF model...")
+
+        # Using predefined parameters
         if args.gridsearch == "n":
-            logging.info(f"No grid search...")
+            logging.info(f"Using predefined parameters.")
 
             # Training RF model using predefined parameters
             n_estimators = 50
@@ -81,6 +108,7 @@ def train(X, Y, args):
 
             return rf_model
 
+        # Grid search
         else:
             logging.info(f"Doing grid search, it may take a while...")
 
@@ -105,12 +133,30 @@ def train(X, Y, args):
             )
             rf_model.fit(X, Y)
 
-            print("Using hyperparameters --> \n", rf_model.best_params_)
+            logging.info(f"Using hyperparameters: {rf_model.best_params_}")
 
             return rf_model
 
 
 def predict(X, model):
+    """
+    Predict labels given the features and the trained model
+
+    Parameters
+    ----------
+
+    X : array
+        features to predict on
+    model : object
+        trained model
+
+    Returns
+    -------
+
+    predictions : array
+        Array with the predicted labels
+
+    """
     Y_pred = model.predict(X)
 
     return Y_pred

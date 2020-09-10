@@ -9,22 +9,32 @@ logging.basicConfig(level=logging.INFO)
 # Root path of the original data folder
 DATASET_PATH = "dataset/"
 
-def getFeaturesNames():
+def transformToTextLabels(labels):
     """
-    TODO: useless?
-    Get the features names of the dataset
+    Transform numerical labels to corresponding text
+
+    Parameters
+    ----------
+
+    labels : array
+        an array of numerical labels
 
     Returns
     -------
 
-    array : features
+    labels : array
+        same array with corresponding text labels
 
     """
 
-    with open(DATASET_PATH + "features.txt", 'r') as f:
-        features = [row.replace('\n', '').split(' ')[1] for row in f]
-
-    return features
+    labels = labels.astype(str)
+    
+    with open(DATASET_PATH + "activity_labels.txt", 'r') as f:
+        for row in f:
+            num_label, text_label = row.replace('\n', '').split(' ')
+            labels = np.where(labels==str(num_label), text_label, labels)
+            
+    return labels
 
 def getDatasetSplit(split="train"):
     """
@@ -53,15 +63,6 @@ def getDatasetSplit(split="train"):
     # Load labels
     with open(DATASET_PATH + split + "/y_" + split + ".txt", 'r') as f:
         labels = np.array([row.replace('\n', '') for row in f], dtype=int)
-        
-        # Add column's label
-        # labels = np.vstack(("Activity", labels))
-    
-    # Load features names
-    # features = getFeaturesNames()
-
-    # Stack columns names to the data
-    # data = np.vstack((features, data))
 
     return data, labels
 
