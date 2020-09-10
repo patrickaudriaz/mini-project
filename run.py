@@ -6,10 +6,7 @@ import argparse
 
 import database
 import algorithm
-<<<<<<< HEAD
-=======
 import argparse
->>>>>>> training
 import evaluator
 
 
