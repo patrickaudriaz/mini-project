@@ -8,8 +8,31 @@ import requests, zipfile, io, os
 logging.basicConfig(level=logging.INFO)
 
 # URL and Root path of the original data folder
-url = "https://archive.ics.uci.edu/ml/machine-learning-databases/00240/UCI%20HAR%20Dataset.zip"
+URL = "https://archive.ics.uci.edu/ml/machine-learning-databases/00240/UCI%20HAR%20Dataset.zip"
 DATASET_PATH = "UCI HAR Dataset/"
+
+
+def downloadDataset():
+    """
+    Download raw dataset from url and unzip it
+    """
+
+    if not os.path.isdir("UCI HAR Dataset") or len(os.listdir("UCI HAR Dataset")) == 0:
+        
+        logging.info(f"Dataset not locally available, downloading...")
+
+        r = requests.get(URL)
+
+        if not r.ok:
+            logging.info(f"Error while downloading: {r.status_code}")
+            return
+
+        logging.info(f"Extracting raw data...")
+
+        z = zipfile.ZipFile(io.BytesIO(r.content))
+        z.extractall()
+    else:
+        logging.info(f"Dataset already available, skipping download.")
 
 
 def transformToTextLabels(labels):
@@ -92,21 +115,9 @@ def load(standardized=False, printSize=False):
 
     """
 
-    # Get dataset from URL as zip and unzip it to be usable for training
-    print("...Downloading Data Set...")
-    if not os.path.isdir("UCI HAR Dataset") or len(os.listdir("UCI HAR Dataset")) == 0:
-        r = requests.get(url)
-        if not r.ok:
-            print("ERROR : ", r.status_code)
-            return
-        print("...Extracting Data Set...")
-        z = zipfile.ZipFile(io.BytesIO(r.content))
-        z.extractall()
-        print("...DONE !")
-    else:
-        print("--> Data Set already available, skipping.")
-
     logging.info(f"Starting dataset loading...")
+
+    downloadDataset()
 
     # Get training data
     train_data, train_labels = getDatasetSplit("train")
@@ -114,9 +125,8 @@ def load(standardized=False, printSize=False):
     # Get testing data
     test_data, test_labels = getDatasetSplit("test")
 
-    logging.info(f"Dataset loaded.")
+    logging.info(f"Dataset ready.")
 
-    # Print size if requested
     if printSize:
         logging.info(f"---Train samples: {train_data.shape[0]}")
         logging.info(f"---Test samples: {test_data.shape[0]}")
