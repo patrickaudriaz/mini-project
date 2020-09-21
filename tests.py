@@ -73,19 +73,12 @@ def test_load(caplog):
 
 """Tests the algorithm script"""
 
-class MockArgs:
-  def __init__(self):
-    self.model = "rf"
-    self.gridsearch = "n"
-    self.output_folder = "results"
-
 def test_algorithm():
-    args = MockArgs()
+    args = run.get_args(['-model', 'rf'])
     pytest.model = algorithm.train(pytest.train_data, pytest.train_labels, args)
 
 def test_predict():
     pytest.predictions = algorithm.predict(pytest.test_data, pytest.model)
-
 
 
 """Tests the evaluator script"""
@@ -127,3 +120,13 @@ def test_evaluate(caplog):
 
     assert os.path.isfile(os.getcwd() + "/results/table.rst")
     assert os.path.isfile(os.getcwd() + "/results/confusion_matrix.png")
+
+
+"""Tests the main script"""
+
+def test_getArgs():
+    args = run.get_args(['-model', 'rf'])
+
+    assert args.gridsearch == "n"
+    assert args.model == "rf"
+    assert args.output_folder == "results"
