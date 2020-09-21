@@ -18,5 +18,5 @@ install:
 
 script:
   # Run phase of our CI pipeline
-  - pytest -v tests.py #runs test
+  - pytest --cov=./ -v tests.py #runs test
   - coveralls #uploads coverage report to coveralls.io
