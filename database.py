@@ -92,7 +92,7 @@ def load(standardized=False, printSize=False):
 
     """
 
-    # Get dataset from URL as zip and unzip it to be usable
+    # Get dataset from URL as zip and unzip it to be usable for training
     print("...Downloading Data Set...")
     if not os.path.isdir("UCI HAR Dataset") or len(os.listdir("UCI HAR Dataset")) == 0:
         r = requests.get(url)
