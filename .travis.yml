@@ -13,7 +13,7 @@ install:
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
   - conda info -a
-  - conda create -y -q --name mini-project python=$TRAVIS_PYTHON_VERSION --file requirements.txt
+  - conda create -y -q --name mini-project --file requirements.txt
   - conda activate  mini-project
 
 script:
