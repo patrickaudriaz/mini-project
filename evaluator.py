@@ -8,8 +8,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 from database import transformToTextLabels
 from sklearn.utils.multiclass import unique_labels
-from sklearn.metrics import precision_score, recall_score, f1_score, \
-                            accuracy_score, confusion_matrix, classification_report
+from sklearn.metrics import (
+    precision_score,
+    recall_score,
+    f1_score,
+    accuracy_score,
+    confusion_matrix,
+    classification_report,
+)
+from sklearn.metrics import plot_confusion_matrix
+
 
 def getMetricsTable(predictions, test_labels):
     """
@@ -38,16 +46,12 @@ def getMetricsTable(predictions, test_labels):
     accuracy = accuracy_score(test_labels, predictions)
 
     # Create table
-    headers = [
-        "Precision (avg)",
-        "Recall (avg)",
-        "F1 score (avg)",
-        "Accuracy"
-        ]
+    headers = ["Precision (avg)", "Recall (avg)", "F1 score (avg)", "Accuracy"]
 
     table = [[precision, recall, f1, accuracy]]
 
     return tabulate.tabulate(table, headers, tablefmt="rst", floatfmt=".3f")
+
 
 def getTableHeader(model_name, model):
     """
@@ -72,19 +76,24 @@ def getTableHeader(model_name, model):
     header = f"Model used: {str(model_name)}\n" + "Parameters:\n"
 
     if model_name == "svm":
-        header += f"-kernel: {model.kernel}\n" \
-                + f"-gamma: {model.gamma}\n" \
-                + f"-C: {model.C}\n"
+        header += (
+            f"-kernel: {model.kernel}\n"
+            + f"-gamma: {model.gamma}\n"
+            + f"-C: {model.C}\n"
+        )
     elif model_name == "rf":
-        header += f"-n_estimators: {model.n_estimators}\n" \
-                    + f"-max_depth: {model.max_depth}\n" \
-                    + f"-min_samples_split: {model.min_samples_split}\n" \
-                    + f"-min_samples_leaf: {model.min_samples_leaf}\n" \
-                    + f"-bootstrap: {model.bootstrap}\n"
+        header += (
+            f"-n_estimators: {model.n_estimators}\n"
+            + f"-max_depth: {model.max_depth}\n"
+            + f"-min_samples_split: {model.min_samples_split}\n"
+            + f"-min_samples_leaf: {model.min_samples_leaf}\n"
+            + f"-bootstrap: {model.bootstrap}\n"
+        )
 
     return header
 
 
+'''
 def plot_confusion_matrix(y_pred, y_true,
                           normalize=False,
                           title=None,
@@ -159,8 +168,10 @@ def plot_confusion_matrix(y_pred, y_true,
     fig.tight_layout()
 
     return fig
+'''
 
-def evaluate(predictions, test_labels, output_dir, model_name, model):
+
+def evaluate(predictions, test_data, test_labels, output_dir, model_name, model):
     """
     Evaluate the predictions given the ground-truth. Save a table with
     the metrics and a png file with the confusion matrix.
@@ -196,15 +207,36 @@ def evaluate(predictions, test_labels, output_dir, model_name, model):
     with open(output_table, "wt") as f:
         f.write(table)
 
-    # Transform numerical labels to text for the plot
-    predictions = transformToTextLabels(predictions)
-    test_labels = transformToTextLabels(test_labels)
+    # Numerical labels to text for the plot
+    classes = [
+        "WALKING",
+        "WALKING_UPSTAIRS",
+        "WALKING_DOWNSTAIRS",
+        "SITTING",
+        "STANDING",
+        "LAYING",
+    ]
+
+    fig, ax = plt.subplots(figsize=(17, 15))
 
     # Get the normalized confusion matrix
-    fig = plot_confusion_matrix(predictions, test_labels, normalize=True,
-                      title=f"Normalized confusion matrix\nModel: {model_name}")
+    fig = plot_confusion_matrix(
+        model,
+        test_data,
+        test_labels,
+        normalize="true",
+        cmap=plt.cm.Blues,
+        display_labels=classes,
+        xticks_rotation="vertical",
+        ax=ax,
+    )
+
+    fig.ax_.set(ylabel="True label", xlabel="Predicted label")
+
+    title = f"Normalized confusion matrix\nModel: {model_name}"
+    fig.ax_.set_title(title)
 
     # Save the confusion matrix
     output_figure = os.getcwd() + "/" + output_dir + "/confusion_matrix.png"
     logging.info(f"Saving confusion matrix at {output_figure}")
-    fig.savefig(output_figure, dpi=fig.dpi)
+    plt.savefig(output_figure)
