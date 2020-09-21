@@ -49,3 +49,16 @@ def test_getDatasetSplit():
     assert test_labels.shape == (2947, )
     assert min(test_labels) == 1
     assert max(test_labels) == 6
+
+
+def test_load(caplog):
+    
+    caplog.set_level(logging.INFO)
+
+    train_data, train_labels, test_data, test_labels = database.load(
+        standardized=True, printSize=True
+    )
+
+    assert caplog.record_tuples[3][2] == "---Train samples: 7352"
+    assert caplog.record_tuples[4][2] == "---Test samples: 2947"
+    assert caplog.record_tuples[5][2] == "Dataset standardized."
