@@ -12,6 +12,7 @@ import evaluator
 
 logging.basicConfig(level=logging.INFO)
 
+
 def main(args):
 
     # Load data and ground-truth

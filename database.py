@@ -3,11 +3,14 @@
 
 import numpy as np
 import logging
+import requests, zipfile, io, os
 
 logging.basicConfig(level=logging.INFO)
 
-# Root path of the original data folder
-DATASET_PATH = "dataset/"
+# URL and Root path of the original data folder
+url = "https://archive.ics.uci.edu/ml/machine-learning-databases/00240/UCI%20HAR%20Dataset.zip"
+DATASET_PATH = "UCI HAR Dataset/"
+
 
 def transformToTextLabels(labels):
     """
@@ -28,13 +31,14 @@ def transformToTextLabels(labels):
     """
 
     labels = labels.astype(str)
-    
-    with open(DATASET_PATH + "activity_labels.txt", 'r') as f:
+
+    with open(DATASET_PATH + "activity_labels.txt", "r") as f:
         for row in f:
-            num_label, text_label = row.replace('\n', '').split(' ')
-            labels = np.where(labels==str(num_label), text_label, labels)
-            
+            num_label, text_label = row.replace("\n", "").split(" ")
+            labels = np.where(labels == str(num_label), text_label, labels)
+
     return labels
+
 
 def getDatasetSplit(split="train"):
     """
@@ -57,12 +61,12 @@ def getDatasetSplit(split="train"):
     """
 
     # Load data
-    with open(DATASET_PATH + split + "/X_" + split + ".txt", 'r') as f:
-        data = np.array([row.replace('  ', ' ').strip().split(' ') for row in f])
+    with open(DATASET_PATH + split + "/X_" + split + ".txt", "r") as f:
+        data = np.array([row.replace("  ", " ").strip().split(" ") for row in f])
 
     # Load labels
-    with open(DATASET_PATH + split + "/y_" + split + ".txt", 'r') as f:
-        labels = np.array([row.replace('\n', '') for row in f], dtype=int)
+    with open(DATASET_PATH + split + "/y_" + split + ".txt", "r") as f:
+        labels = np.array([row.replace("\n", "") for row in f], dtype=int)
 
     return data, labels
 
@@ -87,6 +91,21 @@ def load(standardized=False, printSize=False):
     test_labels: array
 
     """
+
+    # Get dataset from URL as zip and unzip it to be usable
+    print("...Downloading Data Set...")
+    if not os.path.isdir("UCI HAR Dataset") or len(os.listdir("UCI HAR Dataset")) == 0:
+        r = requests.get(url)
+        if not r.ok:
+            print("ERROR : ", r.status_code)
+            return
+        print("...Extracting Data Set...")
+        z = zipfile.ZipFile(io.BytesIO(r.content))
+        z.extractall()
+        print("...DONE !")
+    else:
+        print("--> Data Set already available, skipping.")
+
     logging.info(f"Starting dataset loading...")
 
     # Get training data
