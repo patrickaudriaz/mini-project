@@ -31,7 +31,9 @@ def main(args):
     predictions = algorithm.predict(test_data, model)
 
     # Evaluate the predictions
-    evaluator.evaluate(predictions, test_labels, args.output_folder, args.model, model)
+    evaluator.evaluate(
+        predictions, test_data, test_labels, args.output_folder, args.model, model
+    )
 
 
 def get_args():
