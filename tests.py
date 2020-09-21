@@ -125,15 +125,10 @@ class MockArgs:
 def test_algorithm():
     args = MockArgs("rf", "n")
     args_svm = MockArgs("svm", "n")
-    args_rf_GS = MockArgs("rf", "y")
-    args_svm_GS = MockArgs("svm", "y")
 
     pytest.model = algorithm.train(pytest.train_data, pytest.train_labels, args)
-    pytest.model_2 = algorithm.train(pytest.train_data, pytest.train_labels, args_rf_GS)
-    pytest.model_3 = algorithm.train(pytest.train_data, pytest.train_labels, args_svm)
-    pytest.model_4 = algorithm.train(
-        pytest.train_data, pytest.train_labels, args_svm_GS
-    )
+    pytest.model_2 = algorithm.train(pytest.train_data, pytest.train_labels, args_svm)
+
 
     assert pytest.model.get_params().get("n_estimators") == 50
     assert pytest.model.get_params().get("max_depth") == 25
@@ -142,22 +137,10 @@ def test_algorithm():
     assert pytest.model.get_params().get("bootstrap") == True
     assert type(pytest.model).__name__ == "RandomForestClassifier"
 
-    assert pytest.model_3.get_params().get("kernel") == "rbf"
-    assert pytest.model_3.get_params().get("gamma") == 0.0001
-    assert pytest.model_3.get_params().get("C") == 1000
-    assert type(pytest.model_3).__name__ == "SVC"
-
-    assert pytest.model_2.get_params().get("n_estimators") == 50
-    assert pytest.model_2.get_params().get("max_depth") == 25
-    assert pytest.model_2.get_params().get("min_samples_split") == 2
-    assert pytest.model_2.get_params().get("min_samples_leaf") == 4
-    assert pytest.model_2.get_params().get("bootstrap") == True
-    assert type(pytest.model_2).__name__ == "RandomForestClassifier"
-
-    assert pytest.model_4.get_params().get("kernel") == "rbf"
-    assert pytest.model_4.get_params().get("gamma") == 0.0001
-    assert pytest.model_4.get_params().get("C") == 1000
-    assert type(pytest.model_4).__name__ == "SVC"
+    assert pytest.model_2.get_params().get("kernel") == "rbf"
+    assert pytest.model_2.get_params().get("gamma") == 0.0001
+    assert pytest.model_2.get_params().get("C") == 1000
+    assert type(pytest.model_2).__name__ == "SVC"
 
 
 
