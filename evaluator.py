@@ -130,14 +130,8 @@ def evaluate(predictions, test_data, test_labels, output_dir, model_name, model)
         f.write(table)
 
     # Numerical labels to text for the plot
-    classes = [
-        "WALKING",
-        "WALKING_UPSTAIRS",
-        "WALKING_DOWNSTAIRS",
-        "SITTING",
-        "STANDING",
-        "LAYING",
-    ]
+    test_labels_txt = set(test_labels)
+    classes_txt = transformToTextLabels(np.array(list(test_labels_txt)))
 
     fig, ax = plt.subplots(figsize=(17, 15))
 
@@ -148,7 +142,7 @@ def evaluate(predictions, test_data, test_labels, output_dir, model_name, model)
         test_labels,
         normalize="true",
         cmap=plt.cm.Blues,
-        display_labels=classes,
+        display_labels=classes_txt,
         xticks_rotation="vertical",
         ax=ax,
     )
