@@ -115,20 +115,12 @@ def test_standardize():
 """Tests the algorithm script"""
 
 
-class MockArgs:
-    def __init__(self, model, gridsearch):
-        self.model = model
-        self.gridsearch = gridsearch
-        self.output_folder = "results"
-
-
 def test_algorithm():
-    args = MockArgs("rf", "n")
-    args_svm = MockArgs("svm", "n")
+    args = run.get_args(["-model", "rf"])
+    args_svm = run.get_args(["-model", "svm"])
 
     pytest.model = algorithm.train(pytest.train_data, pytest.train_labels, args)
     pytest.model_2 = algorithm.train(pytest.train_data, pytest.train_labels, args_svm)
-
 
     assert pytest.model.get_params().get("n_estimators") == 50
     assert pytest.model.get_params().get("max_depth") == 25
@@ -141,7 +133,6 @@ def test_algorithm():
     assert pytest.model_2.get_params().get("gamma") == 0.0001
     assert pytest.model_2.get_params().get("C") == 1000
     assert type(pytest.model_2).__name__ == "SVC"
-
 
 
 def test_predict():
@@ -182,7 +173,9 @@ def test_getTableHeader():
     assert len(table.splitlines()) == 7
 
 
-def test_evaluate():
+def test_evaluate(caplog):
+    caplog.set_level(logging.INFO)
+
     evaluator.evaluate(
         pytest.predictions,
         pytest.test_data,
@@ -192,5 +185,21 @@ def test_evaluate():
         pytest.model,
     )
 
+    assert "Saving table at" in caplog.record_tuples[1][2]
+    assert "Saving confusion matrix at" in caplog.record_tuples[2][2]
+
     assert os.path.isfile(os.getcwd() + "/results/table.rst")
     assert os.path.isfile(os.getcwd() + "/results/confusion_matrix.png")
+
+
+# ========================================================================
+
+"""Tests the main script"""
+
+
+def test_getArgs():
+    args = run.get_args(["-model", "rf"])
+
+    assert args.gridsearch == "n"
+    assert args.model == "rf"
+    assert args.output_folder == "results"
