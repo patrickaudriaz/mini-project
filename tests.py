@@ -190,8 +190,8 @@ def test_evaluate(caplog):
 
     assert os.path.isfile(os.getcwd() + "/results/table.rst")
     assert os.path.isfile(os.getcwd() + "/results/confusion_matrix.png")
-
-
+    
+    
 # ========================================================================
 
 """Tests the main script"""
@@ -203,3 +203,4 @@ def test_getArgs():
     assert args.gridsearch == "n"
     assert args.model == "rf"
     assert args.output_folder == "results"
+
