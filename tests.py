@@ -115,16 +115,9 @@ def test_standardize():
 """Tests the algorithm script"""
 
 
-class MockArgs:
-    def __init__(self, model, gridsearch):
-        self.model = model
-        self.gridsearch = gridsearch
-        self.output_folder = "results"
-
-
 def test_algorithm():
-    args = MockArgs("rf", "n")
-    args_svm = MockArgs("svm", "n")
+    args = run.get_args(["-model", "rf"])
+    args_svm = run.get_args(["-model", "svm"])
 
     pytest.model = algorithm.train(pytest.train_data, pytest.train_labels, args)
     pytest.model_2 = algorithm.train(pytest.train_data, pytest.train_labels, args_svm)
@@ -181,7 +174,6 @@ def test_getTableHeader():
 
 
 def test_evaluate(caplog):
-
     caplog.set_level(logging.INFO)
 
     evaluator.evaluate(
@@ -198,7 +190,9 @@ def test_evaluate(caplog):
 
     assert os.path.isfile(os.getcwd() + "/results/table.rst")
     assert os.path.isfile(os.getcwd() + "/results/confusion_matrix.png")
-
+    
+    
+# ========================================================================
 
 """Tests the main script"""
 
