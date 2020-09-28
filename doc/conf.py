@@ -31,6 +31,7 @@ extensions = [
     "sphinx.ext.viewcode",
     "sphinx.ext.mathjax",
     "sphinx_rtd_theme",
+    "sphinx.ext.autosectionlabel",
 ]
 
 # Be picky about warnings
