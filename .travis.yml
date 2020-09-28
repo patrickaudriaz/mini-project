@@ -15,8 +15,23 @@ install:
   - conda info -a
   - conda create -y -q --name mini-project --file requirements.txt
   - conda activate  mini-project
+  - conda install sphinx sphinx_rtd_theme
 
 script:
   # Run phase of our CI pipeline
   - pytest --cov=./ -v tests.py #runs test
+  - sphinx-build -b doctest doc sphinx
+    # Build docs
+  - touch sphinx/.nojekyll
+  - sphinx-build doc sphinx
   - coveralls #uploads coverage report to coveralls.io
+
+deploy:
+  - provider: pages:git
+    verbose: true
+    edge: true
+    token: $GITHUB_TOKEN
+    local_dir: ./sphinx/
+    on:
+        branch: master
+        condition: $TRAVIS_PYTHON_VERSION = 3.8
