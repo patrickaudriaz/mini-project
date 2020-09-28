@@ -72,4 +72,3 @@ if __name__ == "__main__":
     logging.info(f"Using arguments: {args}")
 
     main(args)
-
