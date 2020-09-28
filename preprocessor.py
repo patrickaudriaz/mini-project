@@ -4,6 +4,7 @@
 from sklearn.preprocessing import StandardScaler
 import logging
 
+
 def standardize(train_data, test_data):
     """
     Standardize training and testing data
@@ -29,7 +30,7 @@ def standardize(train_data, test_data):
 
     # Instantiate scikit standard scaler
     scaler = StandardScaler()
-    
+
     # Fit and standardize on training data
     train_data_std = scaler.fit_transform(train_data)
 

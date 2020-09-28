@@ -18,7 +18,7 @@ def downloadDataset():
     """
 
     if not os.path.isdir("UCI HAR Dataset") or len(os.listdir("UCI HAR Dataset")) == 0:
-        
+
         logging.info(f"Dataset not locally available, downloading...")
 
         r = requests.get(URL)
