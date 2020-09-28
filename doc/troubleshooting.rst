@@ -12,8 +12,8 @@ You can run unit tests we have prepared like this (install pytest_ first):
 
   # use your package manager to install the package "pytest"
   # here, I examplify with "miniconda":
-  (project) $ conda install pytest
-  (project) $ pytest ./test.py
+  (activities) $ conda install pytest
+  (activities) $ pytest ./test.py
   ....
   
   tests.py ...........    
