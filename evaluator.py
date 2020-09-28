@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import sklearn
 import tabulate
 import os
 import logging
@@ -74,6 +75,9 @@ def get_table_header(model_name, model):
     """
 
     header = f"Model used: {str(model_name)}\n" + "Parameters:\n"
+
+    if type(model) is sklearn.model_selection._search.GridSearchCV:
+        model = model.best_estimator_
 
     if model_name == "svm":
         header += (
