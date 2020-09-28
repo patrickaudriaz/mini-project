@@ -7,23 +7,16 @@
 [![Generic badge](https://img.shields.io/badge/github-project-purple.svg)](https://github.com/patrickaudriaz/mini-project)
 
 
-
-<br>
-
 > This project aims to train a model to recognise human activities (like walking, standing, or sitting) based on  accelerometer and gyroscope data collected with a smartphone.
 
 
-<br>
-
 ## [**Documentation**]()
 
-<br>
 
 ## **Authors** 
 - [Geoffrey Raposo](https://www.idiap.ch/~graposo/)
 - [Patrick Audriaz](https://patrick-audriaz.com/)
   
-<br>
 
 ## [**Dataset**](https://archive.ics.uci.edu/ml/datasets/human+activity+recognition+using+smartphones)
 
@@ -35,14 +28,16 @@
 - **651 features**  with time and frequency domain variables
 
 
-
 > Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. A Public Domain Dataset for Human Activity Recognition Using Smartphones. 21th European Symposium on Artificial Neural Networks, Computational Intelligence and Machine Learning, ESANN 2013. Bruges, Belgium 24-26 April 2013.
 
 
-<br>
+## **Experiments**
+**Task** : Classification (Supervised Learning)
+- **Train a SVM model** (Hyper-Parameters tuning with Grid Search)
+- **Train a Random Forest model**(Hyper-Parameters tuning with Grid Search)
 
-## **Available Experiments**
-- Train a SVM model
-- Train a Random Forest model
 
 
+## **Results/Evaluation**
+- **Metrics** : Precision, Recall, F1 Score, Accuracy
+- **Confusion Matrix**
