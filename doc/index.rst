@@ -20,7 +20,7 @@ This package performs multiple tasks sequentially:
 To run the script using the default configuration just follow the 
 :ref:`activities_installation` and use the following command::
 
-   python run.py
+   (activities) $ python run.py
 
 It will train an svm model using predefined parameters and save the analysis
 in a *results* folder.

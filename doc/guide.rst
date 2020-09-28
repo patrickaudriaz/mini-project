@@ -20,7 +20,7 @@ Here are two examples of commands you can use::
 
     # Train a random forest with gridsearch and save the analysis in 
     # the "results" folder
-    (activities) $ python run.py -model svm -gridsearch y -output-folder results
+    (activities) $ python run.py -model rf -gridsearch y -output-folder results
 
 For your reference, our tables and figures are repeated below, so you can 
 check the reproducibility of our solution.
