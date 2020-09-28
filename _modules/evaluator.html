@@ -159,6 +159,7 @@
 <span></span><span class="ch">#!/usr/bin/env python</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
 
+<span class="kn">import</span> <span class="nn">sklearn</span>
 <span class="kn">import</span> <span class="nn">tabulate</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">logging</span>
@@ -232,6 +233,9 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">header</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Model used: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;Parameters:</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">model</span><span class="p">)</span> <span class="ow">is</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">model_selection</span><span class="o">.</span><span class="n">_search</span><span class="o">.</span><span class="n">GridSearchCV</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">best_estimator_</span>
 
     <span class="k">if</span> <span class="n">model_name</span> <span class="o">==</span> <span class="s2">&quot;svm&quot;</span><span class="p">:</span>
         <span class="n">header</span> <span class="o">+=</span> <span class="p">(</span>
