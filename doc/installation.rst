@@ -14,7 +14,7 @@ To download a copy of this package, clone it from its repository in GitHub:
 
 .. code:: sh
 
-   $ git clone git@github.com:patrickaudriaz/mini-project.git activities
+   $ git clone https://github.com/patrickaudriaz/mini-project.git activities
    $ cd activities
    $ conda create --name activities --file requirements.txt
    $ conda activate activities
