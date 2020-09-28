@@ -20,9 +20,9 @@ train_data, train_labels, test_data, test_labels = None, None, None, None
 """Tests the database script"""
 
 
-def test_downloadDataset():
+def test_download_dataset():
 
-    database.downloadDataset()
+    database.download_dataset()
 
     assert os.path.exists("UCI HAR Dataset")
     assert os.path.isdir("UCI HAR Dataset")
@@ -40,10 +40,10 @@ def test_downloadDataset():
         assert f in entries
 
 
-def test_transformToTextLabels():
+def test_transform_to_text_labels():
 
     num_labels = np.array([1, 2, 3, 4, 5, 6])
-    labels = database.transformToTextLabels(num_labels)
+    labels = database.transform_to_text_labels(num_labels)
 
     assert np.array_equal(
         labels,
@@ -60,15 +60,15 @@ def test_transformToTextLabels():
     )
 
 
-def test_getDatasetSplit():
-    train_data, train_labels = database.getDatasetSplit("train")
+def test_get_dataset_split():
+    train_data, train_labels = database.get_dataset_split("train")
 
     assert train_data.shape == (7352, 561)
     assert train_labels.shape == (7352,)
     assert min(train_labels) == 1
     assert max(train_labels) == 6
 
-    test_data, test_labels = database.getDatasetSplit("test")
+    test_data, test_labels = database.get_dataset_split("test")
 
     assert test_data.shape == (2947, 561)
     assert test_labels.shape == (2947,)
@@ -149,12 +149,12 @@ def test_predict():
 """Tests the evaluator script"""
 
 
-def test_getMetricsTable():
+def test_get_metrics_table():
     # Fake data
     predictedLabels = np.array([0, 1, 2, 3, 4, 5])
     trueLabels = np.array([0, 1, 2, 1, 2, 3])
 
-    table = evaluator.getMetricsTable(predictedLabels, trueLabels)
+    table = evaluator.get_metrics_table(predictedLabels, trueLabels)
 
     # Check if we get the correct metrics
     assert table.count("0.5") == 4
@@ -164,9 +164,9 @@ def test_getMetricsTable():
     assert "Accuracy" in table
 
 
-def test_getTableHeader():
+def test_get_table_header():
 
-    table = evaluator.getTableHeader("rf", pytest.model)
+    table = evaluator.get_table_header("rf", pytest.model)
 
     assert "Model used: rf" in table
     assert "Parameters:" in table
@@ -190,14 +190,14 @@ def test_evaluate(caplog):
 
     assert os.path.isfile(os.getcwd() + "/results/table.rst")
     assert os.path.isfile(os.getcwd() + "/results/confusion_matrix.png")
-    
-    
+
+
 # ========================================================================
 
 """Tests the main script"""
 
 
-def test_getArgs():
+def test_get_args():
     args = run.get_args(["-model", "rf"])
 
     assert args.gridsearch == "n"

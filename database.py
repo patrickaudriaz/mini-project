@@ -12,13 +12,13 @@ URL = "https://archive.ics.uci.edu/ml/machine-learning-databases/00240/UCI%20HAR
 DATASET_PATH = "UCI HAR Dataset/"
 
 
-def downloadDataset():
+def download_dataset():
     """
     Download raw dataset from url and unzip it
     """
 
     if not os.path.isdir("UCI HAR Dataset") or len(os.listdir("UCI HAR Dataset")) == 0:
-        
+
         logging.info(f"Dataset not locally available, downloading...")
 
         r = requests.get(URL)
@@ -35,7 +35,7 @@ def downloadDataset():
         logging.info(f"Dataset already available, skipping download.")
 
 
-def transformToTextLabels(labels):
+def transform_to_text_labels(labels):
     """
     Transform numerical labels to corresponding text
 
@@ -63,7 +63,7 @@ def transformToTextLabels(labels):
     return labels
 
 
-def getDatasetSplit(split="train"):
+def get_dataset_split(split="train"):
     """
     Get data and ground-truth of selected split
 
@@ -117,13 +117,13 @@ def load(standardized=False, printSize=False):
 
     logging.info(f"Starting dataset loading...")
 
-    downloadDataset()
+    download_dataset()
 
     # Get training data
-    train_data, train_labels = getDatasetSplit("train")
+    train_data, train_labels = get_dataset_split("train")
 
     # Get testing data
-    test_data, test_labels = getDatasetSplit("test")
+    test_data, test_labels = get_dataset_split("test")
 
     logging.info(f"Dataset ready.")
 

@@ -6,7 +6,7 @@ import os
 import logging
 import numpy as np
 import matplotlib.pyplot as plt
-from database import transformToTextLabels
+from database import transform_to_text_labels
 from sklearn.utils.multiclass import unique_labels
 from sklearn.metrics import (
     precision_score,
@@ -19,7 +19,7 @@ from sklearn.metrics import (
 from sklearn.metrics import plot_confusion_matrix
 
 
-def getMetricsTable(predictions, test_labels):
+def get_metrics_table(predictions, test_labels):
     """
     Generate a metrics table to evaluate predictions
 
@@ -53,7 +53,7 @@ def getMetricsTable(predictions, test_labels):
     return tabulate.tabulate(table, headers, tablefmt="rst", floatfmt=".3f")
 
 
-def getTableHeader(model_name, model):
+def get_table_header(model_name, model):
     """
     Generate a header for the metrics table
 
@@ -117,10 +117,10 @@ def evaluate(predictions, test_data, test_labels, output_dir, model_name, model)
     logging.info(f"Starting evaluation...")
 
     # Get the metrics table
-    table = getMetricsTable(predictions, test_labels)
+    table = get_metrics_table(predictions, test_labels)
 
     # Append header to the table
-    table = getTableHeader(model_name, model) + table
+    table = get_table_header(model_name, model) + table
 
     # Save the metrics table
     output_table = os.getcwd() + "/" + output_dir + "/table.rst"
@@ -131,7 +131,7 @@ def evaluate(predictions, test_data, test_labels, output_dir, model_name, model)
 
     # Numerical labels to text for the plot
     test_labels_txt = set(test_labels)
-    classes_txt = transformToTextLabels(np.array(list(test_labels_txt)))
+    classes_txt = transform_to_text_labels(np.array(list(test_labels_txt)))
 
     fig, ax = plt.subplots(figsize=(17, 15))
 
