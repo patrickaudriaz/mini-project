@@ -160,15 +160,33 @@
             
   <div class="section" id="reproducible-activities-recognition-from-smartphone-sensors">
 <span id="activities"></span><h1>Reproducible Activities Recognition From Smartphone Sensors<a class="headerlink" href="#reproducible-activities-recognition-from-smartphone-sensors" title="Permalink to this headline">¶</a></h1>
-<p>This package contains code to run random forest and svm classification
-on a <a class="reference external" href="https://archive.ics.uci.edu/ml/datasets/human+activity+recognition+using+smartphones">dataset</a> created for the study of activities recognition from smartphones
+<p>This package contains code to run random forest or svm classification
+on a <a class="reference external" href="https://archive.ics.uci.edu/ml/datasets/human+activity+recognition+using+smartphones">dataset</a> created for the study of activities recognition from smartphone
 sensors.</p>
+<p>This package performs multiple tasks sequentially:</p>
+<ol class="arabic simple">
+<li><p>Download the dataset (if not already available)</p></li>
+<li><p>Train a model (random forest or svm) to recognize activities</p></li>
+<li><p>Predict the activities of the testing set</p></li>
+<li><p>Evaluate the performances and save the analysis in the output folder</p></li>
+</ol>
+<p>To run the script using the default configuration just follow the
+<a class="reference internal" href="installation.html#activities-installation"><span class="std std-ref">Installation</span></a> and use the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">run</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>It will train an svm model using predefined parameters and save the analysis
+in a <em>results</em> folder.</p>
 <div class="section" id="documentation">
 <h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guide.html">User Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="guide.html#results-with-the-svm-model">Results with the SVM model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide.html#results-with-the-random-forest-model">Results with the random forest model</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">Python API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="api.html#module-database">Database</a></li>
