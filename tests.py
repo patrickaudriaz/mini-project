@@ -203,4 +203,3 @@ def test_get_args():
     assert args.gridsearch == "n"
     assert args.model == "rf"
     assert args.output_folder == "results"
-
