@@ -38,7 +38,12 @@ def main(args):
 
 def get_args(args=None):
     parser = argparse.ArgumentParser(
-        "Train using a Support Vector Machine (SVM) model or a Random Forest (RF) model. You can also train with (very slow) or without doing Grid Search for performing hyper parameter tuning"
+        """Train using a Support Vector Machine (SVM) model or a Random Forest 
+        (RF) model. You can also train with (very slow) or without doing 
+        Grid Search for performing hyper parameter tuning 
+        
+        Example: python run.py -model rf -gridsearch n -output-folder results
+        """
     )
     parser.add_argument(
         "-model",
