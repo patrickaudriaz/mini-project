@@ -4,7 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/patrickaudriaz/mini-project/badge.svg)](https://coveralls.io/github/patrickaudriaz/mini-project)
 [![Generic badge](https://img.shields.io/badge/doc-latest-orange.svg)](https://patrickaudriaz.github.io/mini-project/)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/patrickaudriaz/mini-project)
-[![Generic badge](https://img.shields.io/badge/github-project-purple.svg)](https://patrickaudriaz.github.io/mini-project/)
+[![Generic badge](https://img.shields.io/badge/github-project-purple.svg)](hhttps://github.com/patrickaudriaz/mini-project)
 [![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT)
 
 
