@@ -109,7 +109,7 @@ def get_args(args=None):
         default=False,
     )
 
-    args, rem_args = parser.parse_known_args()
+    args, rem_args = parser.parse_known_args(args)
 
     if args.custom_train:
         parser.add_argument(
