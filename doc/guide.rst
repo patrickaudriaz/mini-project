@@ -79,14 +79,14 @@ You can then simply call the *run.py* script using your new model option.
 
 Using custom Data
 ------------------
-If you want, you can use custom data for either the training set , the test set, or both.
-To do so, you have to set the corresponding flag (-custom-train, -custom-test) and specify the path of the data set ``.txt`` files (data and labels) in the arguments.
+If you want, you can use custom data for either the training set, the test set, or both.
+To do so, you have to specify the path of the data set ``.txt`` files (data and labels) in the arguments.
 
 Here is an examples of command you can use to load a custom dataset::
 
   # Train an SVM with predefined parameters and use custom train data
   # and custom test data
-  (activities) $ python run.py -model svm -gridsearch n -custom-train -train-data data/X_train.txt -train-labels data/y_train.txt -custom-test -test-data data/X_test.txt -test-labels data/y_test.txt
+  (activities) $ python run.py -model svm -gridsearch n -train-data data/X_train.txt -train-labels data/y_train.txt -test-data data/X_test.txt -test-labels data/y_test.txt
 
 **Dataset Formatting**
 

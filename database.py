@@ -15,6 +15,7 @@ TRAIN_LABELS = DATASET_PATH + "/train/y_train.txt"
 TEST_DATA = DATASET_PATH + "/test/X_test.txt"
 TEST_LABELS = DATASET_PATH + "/test/y_test.txt"
 
+
 def download_dataset():
     """
     Download raw dataset from url and unzip it
@@ -99,8 +100,14 @@ def get_dataset_split(data_path, labels_path):
     return data, labels
 
 
-def load(standardized=False, printSize=False, train_data_path=None, 
-        train_labels_path=None, test_data_path=None, test_labels_path=None):
+def load(
+    standardized=False,
+    printSize=False,
+    train_data_path=None,
+    train_labels_path=None,
+    test_data_path=None,
+    test_labels_path=None,
+):
     """
     Get the dataset and the corresponding labels split
     into a training and a testing set
@@ -128,12 +135,14 @@ def load(standardized=False, printSize=False, train_data_path=None,
     # Get training data
     if train_data_path and train_labels_path:
         train_data, train_labels = get_dataset_split(train_data_path, train_labels_path)
+        logging.info(f"Custom Train Dataset loaded.")
     else:
         train_data, train_labels = get_dataset_split(TRAIN_DATA, TRAIN_LABELS)
 
     # Get testing data
     if test_data_path and test_labels_path:
         test_data, test_labels = get_dataset_split(test_data_path, test_labels_path)
+        logging.info(f"Custom Test Dataset loaded.")
     else:
         test_data, test_labels = get_dataset_split(TEST_DATA, TEST_LABELS)
 

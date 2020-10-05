@@ -15,12 +15,15 @@ logging.basicConfig(level=logging.INFO)
 
 
 def main(args):
-    
+
     # Load data and ground-truth
     train_data, train_labels, test_data, test_labels = database.load(
-        standardized=True, printSize=True, train_data_path=args.train_data, 
-        train_labels_path=args.train_labels, test_data_path=args.test_data, 
-        test_labels_path=args.test_labels
+        standardized=True,
+        printSize=True,
+        train_data_path=args.train_data,
+        train_labels_path=args.train_labels,
+        test_data_path=args.test_data,
+        test_labels_path=args.test_labels,
     )
     train_labels = train_labels.ravel()
 
