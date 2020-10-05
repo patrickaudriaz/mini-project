@@ -61,14 +61,20 @@ def test_transform_to_text_labels():
 
 
 def test_get_dataset_split():
-    train_data, train_labels = database.get_dataset_split("train")
+    train_data = "UCI HAR Dataset/train/X_train.txt"
+    train_labels = "UCI HAR Dataset/train/y_train.txt"
+
+    train_data, train_labels = database.get_dataset_split(train_data, train_labels)
 
     assert train_data.shape == (7352, 561)
     assert train_labels.shape == (7352,)
     assert min(train_labels) == 1
     assert max(train_labels) == 6
 
-    test_data, test_labels = database.get_dataset_split("test")
+    test_data = "UCI HAR Dataset/test/X_test.txt"
+    test_labels = "UCI HAR Dataset/test/y_test.txt"
+
+    test_data, test_labels = database.get_dataset_split(test_data, test_labels)
 
     assert test_data.shape == (2947, 561)
     assert test_labels.shape == (2947,)
@@ -91,55 +97,6 @@ def test_load(caplog):
     assert caplog.record_tuples[3][2] == "---Train samples: 7352"
     assert caplog.record_tuples[4][2] == "---Test samples: 2947"
     assert caplog.record_tuples[5][2] == "Dataset standardized."
-
-
-def test_load_train(caplog):
-    caplog.set_level(logging.INFO)
-
-    # Save data for other tests
-    (pytest.train_data, pytest.train_labels) = database.load_train(printSize=True)
-
-    assert caplog.record_tuples[3][2] == "---Train samples: 7352"
-
-
-def test_load_test(caplog):
-    caplog.set_level(logging.INFO)
-
-    # Save data for other tests
-    (pytest.test_data, pytest.test_labels) = database.load_test(printSize=True)
-
-    assert caplog.record_tuples[3][2] == "---Test samples: 2947"
-
-
-def test_load_custom_data(caplog):
-    train_data = "UCI HAR Dataset/train/X_train.txt"
-    train_labels = "UCI HAR Dataset/train/y_train.txt"
-    test_data = "UCI HAR Dataset/test/X_test.txt"
-    test_labels = "UCI HAR Dataset/test/y_test.txt"
-
-    train_data, train_labels = database.load_custom_data(
-        "Train", train_data, train_labels, printSize=True
-    )
-
-    test_data, test_labels = database.load_custom_data(
-        "Test", test_data, test_labels, printSize=True
-    )
-
-    assert train_data.shape[1] == 561
-    assert test_data.shape[1] == 561
-
-    test_labels_test = False
-    for i in test_labels:
-        if i > 6 or i < 1:
-            test_labels_test = True
-
-    train_labels_test = False
-    for i in train_labels:
-        if i > 6 or i < 1:
-            train_labels_test = True
-
-    assert test_labels_test == False
-    assert train_labels_test == False
 
 
 # ========================================================================
