@@ -203,3 +203,15 @@ def test_get_args():
     assert args.gridsearch == "n"
     assert args.model == "rf"
     assert args.output_folder == "results"
+
+
+def test_main_function(caplog):
+    caplog.set_level(logging.INFO)
+
+    args = run.get_args(["-model", "rf"])
+
+    run.main(args)
+
+    assert "Dataset ready." in caplog.messages
+    assert "Training RF model..." in caplog.messages
+    assert "Starting evaluation..." in caplog.messages
