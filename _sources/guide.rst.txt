@@ -90,7 +90,7 @@ Here is an examples of command you can use to load a custom dataset::
 
 **Dataset Formatting**
 
-Please have a look at the *UCI HAR Dataset* documentation for for informations about the formatting of the data. Here is a quick summary : 
+Please have a look at the *UCI HAR Dataset* documentation for information about the formatting of the data. Here is a quick summary : 
 
 - **Data** : 561 feature-columns (see ``features.txt`` and ``features_info.txt``)
 - **Labels** : from 1 to 6 :  (see ``activity_labels.txt``)
