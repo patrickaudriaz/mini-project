@@ -57,3 +57,21 @@ bootstrap = True).
 .. image:: img/rf_confusion_matrix.png
   :width: 1000
   :alt: Random Forest Confusion Matrix
+
+
+Customizing the parameters
+--------------------------
+
+If you want to customize the default parameters or the gridsearch ones, you
+can just modify them in the *algorithm.py* file.
+
+Adding a new model
+------------------
+
+This package allows the use of two Scikit learn models: SVM and random forest.
+If you want to test another model, please follow this procedure:
+
+1. Add a new option with the name of your model in the *get_args* function in run.py
+2. Add an *elif* condition implementing your model in algorithm.py
+
+You can then simply call the *run.py* script using your new model option.

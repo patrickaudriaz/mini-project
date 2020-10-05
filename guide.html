@@ -95,6 +95,8 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">User Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#results-with-the-svm-model">Results with the SVM model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#results-with-the-random-forest-model">Results with the random forest model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#customizing-the-parameters">Customizing the parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#adding-a-new-model">Adding a new model</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
@@ -238,6 +240,21 @@ bootstrap = True).</p>
 </tbody>
 </table>
 <a class="reference internal image-reference" href="_images/rf_confusion_matrix.png"><img alt="Random Forest Confusion Matrix" src="_images/rf_confusion_matrix.png" style="width: 1000px;" /></a>
+</div>
+<div class="section" id="customizing-the-parameters">
+<h2>Customizing the parameters<a class="headerlink" href="#customizing-the-parameters" title="Permalink to this headline">¶</a></h2>
+<p>If you want to customize the default parameters or the gridsearch ones, you
+can just modify them in the <em>algorithm.py</em> file.</p>
+</div>
+<div class="section" id="adding-a-new-model">
+<h2>Adding a new model<a class="headerlink" href="#adding-a-new-model" title="Permalink to this headline">¶</a></h2>
+<p>This package allows the use of two Scikit learn models: SVM and random forest.
+If you want to test another model, please follow this procedure:</p>
+<ol class="arabic simple">
+<li><p>Add a new option with the name of your model in the <em>get_args</em> function in run.py</p></li>
+<li><p>Add an <em>elif</em> condition implementing your model in algorithm.py</p></li>
+</ol>
+<p>You can then simply call the <em>run.py</em> script using your new model option.</p>
 </div>
 </div>
 
