@@ -15,7 +15,7 @@ install:
   - conda info -a
   - conda create -y -q --name mini-project --file requirements.txt
   - conda activate  mini-project
-  - conda install sphinx sphinx_rtd_theme
+  - conda install --yes --file build-requirements.txt
 
 script:
   # Run phase of our CI pipeline

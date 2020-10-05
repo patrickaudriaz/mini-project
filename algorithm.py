@@ -53,7 +53,7 @@ def train(X, Y, args):
             return svm_model
 
         # Grid search
-        else:
+        elif args.gridsearch == "y":
             logging.info(f"Doing grid search, it may take a while...")
 
             # Create the parameter grid
@@ -81,7 +81,7 @@ def train(X, Y, args):
             return svm_model
 
     # Random forest model selected
-    else:
+    elif args.model == "rf":
         logging.info(f"Training RF model...")
 
         # Using predefined parameters
@@ -109,7 +109,7 @@ def train(X, Y, args):
             return rf_model
 
         # Grid search
-        else:
+        elif args.gridsearch == "y":
             logging.info(f"Doing grid search, it may take a while...")
 
             n_estimators = [50, 75, 100]
