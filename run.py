@@ -15,35 +15,13 @@ logging.basicConfig(level=logging.INFO)
 
 
 def main(args):
-    if args.custom_train == True and args.custom_test == False:
-        train_data, train_labels = database.load_custom_data(
-            "Train", args.train_data, args.train_labels, printSize=True
-        )
-
-        test_data, test_labels = database.load_test(printSize=True)
-
-    if args.custom_test == True and args.custom_train == False:
-        train_data, train_labels = database.load_train(printSize=True)
-
-        test_data, test_labels = database.load_custom_data(
-            "Test", args.test_data, args.test_labels, printSize=True
-        )
-
-    if args.custom_test == True and args.custom_train == True:
-        train_data, train_labels = database.load_custom_data(
-            "Train", args.train_data, args.train_labels, printSize=True,
-        )
-
-        test_data, test_labels = database.load_custom_data(
-            "Test", args.test_data, args.test_labels, printSize=True
-        )
-
-    if args.custom_train == False and args.custom_test == False:
-        # Load data and ground-truth
-        train_data, train_labels, test_data, test_labels = database.load(
-            standardized=True, printSize=True
-        )
-
+    
+    # Load data and ground-truth
+    train_data, train_labels, test_data, test_labels = database.load(
+        standardized=True, printSize=True, train_data_path=args.train_data, 
+        train_labels_path=args.train_labels, test_data_path=args.test_data, 
+        test_labels_path=args.test_labels
+    )
     train_labels = train_labels.ravel()
 
     # Training
@@ -93,59 +71,36 @@ def get_args(args=None):
         help="Path where to store the evaluation results (created if does not exist)",
         dest="output_folder",
     )
-
     parser.add_argument(
-        "-custom-train",
-        action="store_true",
-        help="Flag to use custom data set for training. Need to specify -train-data (path to train_data.txt file) and -train-labels (path to train_labels.txt file)",
-        dest="custom_train",
-        default=False,
+        "-train-data",
+        type=str,
+        default=None,
+        help="Path to custom train_data.txt file",
+        dest="train_data",
     )
     parser.add_argument(
-        "-custom-test",
-        action="store_true",
-        help="Flag to use custom data set for prediction.Need to specify -test-data (path to test_data.txt file) and -test-labels (path to test_labels.txt file)",
-        dest="custom_test",
-        default=False,
+        "-train-labels",
+        type=str,
+        default=None,
+        help="Path to custom train_labels.txt file",
+        dest="train_labels",
+    )
+    parser.add_argument(
+        "-test-data",
+        type=str,
+        default=None,
+        help="Path to custom test_data.txt file",
+        dest="test_data",
+    )
+    parser.add_argument(
+        "-test-labels",
+        type=str,
+        default=None,
+        help="Path to custom test_labels.txt file",
+        dest="test_labels",
     )
 
-    args, rem_args = parser.parse_known_args(args)
-
-    if args.custom_train:
-        parser.add_argument(
-            "-train-data",
-            required=True,
-            type=str,
-            help="Path to train_data.txt file",
-            dest="train_data",
-        )
-        parser.add_argument(
-            "-train-labels",
-            required=True,
-            type=str,
-            help="Path to train_labels.txt file",
-            dest="train_labels",
-        )
-
-    if args.custom_test:
-        parser.add_argument(
-            "-test-data",
-            required=True,
-            type=str,
-            help="Path to test_data.txt file",
-            dest="test_data",
-        )
-        parser.add_argument(
-            "-test-labels",
-            required=True,
-            type=str,
-            help="Path to test_labels.txt file",
-            dest="test_labels",
-        )
-
-    args = parser.parse_args(rem_args, namespace=args)
-
-    return args
+    return parser.parse_args(args)
 
 
 if __name__ == "__main__":
