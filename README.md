@@ -1,7 +1,7 @@
 # Human Activity Recognition Using Smartphones
 
 [![Build Status](https://travis-ci.org/patrickaudriaz/mini-project.svg?branch=master)](https://travis-ci.org/patrickaudriaz/mini-project)
-[![Coverage Status](https://coveralls.io/repos/github/patrickaudriaz/mini-project/badge.svg)](https://coveralls.io/github/patrickaudriaz/mini-project)
+[![Coverage Status](https://coveralls.io/repos/github/patrickaudriaz/mini-project/badge.svg?branch=master)](https://coveralls.io/github/patrickaudriaz/mini-project?branch=master)
 [![Generic badge](https://img.shields.io/badge/doc-latest-orange.svg)](https://patrickaudriaz.github.io/mini-project/)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/patrickaudriaz/mini-project)
 [![Generic badge](https://img.shields.io/badge/github-project-purple.svg)](https://github.com/patrickaudriaz/mini-project)
