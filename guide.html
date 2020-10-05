@@ -97,6 +97,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#results-with-the-random-forest-model">Results with the random forest model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#customizing-the-parameters">Customizing the parameters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#adding-a-new-model">Adding a new model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-custom-data">Using custom Data</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
@@ -255,6 +256,23 @@ If you want to test another model, please follow this procedure:</p>
 <li><p>Add an <em>elif</em> condition implementing your model in algorithm.py</p></li>
 </ol>
 <p>You can then simply call the <em>run.py</em> script using your new model option.</p>
+</div>
+<div class="section" id="using-custom-data">
+<h2>Using custom Data<a class="headerlink" href="#using-custom-data" title="Permalink to this headline">¶</a></h2>
+<p>If you want, you can use custom data for either the training set, the test set, or both.
+To do so, you have to specify the path of the data set <code class="docutils literal notranslate"><span class="pre">.txt</span></code> files (data and labels) in the arguments.</p>
+<p>Here is an examples of command you can use to load a custom dataset:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Train an SVM with predefined parameters and use custom train data
+# and custom test data
+(activities) $ python run.py -model svm -gridsearch n -train-data data/X_train.txt -train-labels data/y_train.txt -test-data data/X_test.txt -test-labels data/y_test.txt
+</pre></div>
+</div>
+<p><strong>Dataset Formatting</strong></p>
+<p>Please have a look at the <em>UCI HAR Dataset</em> documentation for for informations about the formatting of the data. Here is a quick summary :</p>
+<ul class="simple">
+<li><p><strong>Data</strong> : 561 feature-columns (see <code class="docutils literal notranslate"><span class="pre">features.txt</span></code> and <code class="docutils literal notranslate"><span class="pre">features_info.txt</span></code>)</p></li>
+<li><p><strong>Labels</strong> : from 1 to 6 :  (see <code class="docutils literal notranslate"><span class="pre">activity_labels.txt</span></code>)</p></li>
+</ul>
 </div>
 </div>
 

@@ -75,3 +75,22 @@ If you want to test another model, please follow this procedure:
 2. Add an *elif* condition implementing your model in algorithm.py
 
 You can then simply call the *run.py* script using your new model option.
+
+
+Using custom Data
+------------------
+If you want, you can use custom data for either the training set, the test set, or both.
+To do so, you have to specify the path of the data set ``.txt`` files (data and labels) in the arguments.
+
+Here is an examples of command you can use to load a custom dataset::
+
+  # Train an SVM with predefined parameters and use custom train data
+  # and custom test data
+  (activities) $ python run.py -model svm -gridsearch n -train-data data/X_train.txt -train-labels data/y_train.txt -test-data data/X_test.txt -test-labels data/y_test.txt
+
+**Dataset Formatting**
+
+Please have a look at the *UCI HAR Dataset* documentation for for informations about the formatting of the data. Here is a quick summary : 
+
+- **Data** : 561 feature-columns (see ``features.txt`` and ``features_info.txt``)
+- **Labels** : from 1 to 6 :  (see ``activity_labels.txt``)

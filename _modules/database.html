@@ -167,7 +167,11 @@
 
 <span class="c1"># URL and Root path of the original data folder</span>
 <span class="n">URL</span> <span class="o">=</span> <span class="s2">&quot;https://archive.ics.uci.edu/ml/machine-learning-databases/00240/UCI%20HAR%20Dataset.zip&quot;</span>
-<span class="n">DATASET_PATH</span> <span class="o">=</span> <span class="s2">&quot;UCI HAR Dataset/&quot;</span>
+<span class="n">DATASET_PATH</span> <span class="o">=</span> <span class="s2">&quot;UCI HAR Dataset&quot;</span>
+<span class="n">TRAIN_DATA</span> <span class="o">=</span> <span class="n">DATASET_PATH</span> <span class="o">+</span> <span class="s2">&quot;/train/X_train.txt&quot;</span>
+<span class="n">TRAIN_LABELS</span> <span class="o">=</span> <span class="n">DATASET_PATH</span> <span class="o">+</span> <span class="s2">&quot;/train/y_train.txt&quot;</span>
+<span class="n">TEST_DATA</span> <span class="o">=</span> <span class="n">DATASET_PATH</span> <span class="o">+</span> <span class="s2">&quot;/test/X_test.txt&quot;</span>
+<span class="n">TEST_LABELS</span> <span class="o">=</span> <span class="n">DATASET_PATH</span> <span class="o">+</span> <span class="s2">&quot;/test/y_test.txt&quot;</span>
 
 
 <div class="viewcode-block" id="download_dataset"><a class="viewcode-back" href="../api.html#database.download_dataset">[docs]</a><span class="k">def</span> <span class="nf">download_dataset</span><span class="p">():</span>
@@ -175,7 +179,7 @@
 <span class="sd">    Download raw dataset from url and unzip it</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="s2">&quot;UCI HAR Dataset&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s2">&quot;UCI HAR Dataset&quot;</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">DATASET_PATH</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">DATASET_PATH</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
 
         <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Dataset not locally available, downloading...&quot;</span><span class="p">)</span>
 
@@ -213,7 +217,7 @@
 
     <span class="n">labels</span> <span class="o">=</span> <span class="n">labels</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
 
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">DATASET_PATH</span> <span class="o">+</span> <span class="s2">&quot;activity_labels.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">DATASET_PATH</span> <span class="o">+</span> <span class="s2">&quot;/activity_labels.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">num_label</span><span class="p">,</span> <span class="n">text_label</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
             <span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">labels</span> <span class="o">==</span> <span class="nb">str</span><span class="p">(</span><span class="n">num_label</span><span class="p">),</span> <span class="n">text_label</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
@@ -221,15 +225,17 @@
     <span class="k">return</span> <span class="n">labels</span></div>
 
 
-<div class="viewcode-block" id="get_dataset_split"><a class="viewcode-back" href="../api.html#database.get_dataset_split">[docs]</a><span class="k">def</span> <span class="nf">get_dataset_split</span><span class="p">(</span><span class="n">split</span><span class="o">=</span><span class="s2">&quot;train&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="get_dataset_split"><a class="viewcode-back" href="../api.html#database.get_dataset_split">[docs]</a><span class="k">def</span> <span class="nf">get_dataset_split</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="n">labels_path</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get data and ground-truth of selected split</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 
-<span class="sd">    split : str</span>
-<span class="sd">        split (train or test) to return</span>
+<span class="sd">    data_path : str</span>
+<span class="sd">        data file location</span>
+<span class="sd">    labels_path : str</span>
+<span class="sd">        labels file location</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -242,17 +248,24 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Load data</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">DATASET_PATH</span> <span class="o">+</span> <span class="n">split</span> <span class="o">+</span> <span class="s2">&quot;/X_&quot;</span> <span class="o">+</span> <span class="n">split</span> <span class="o">+</span> <span class="s2">&quot;.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">row</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;  &quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">f</span><span class="p">])</span>
 
     <span class="c1"># Load labels</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">DATASET_PATH</span> <span class="o">+</span> <span class="n">split</span> <span class="o">+</span> <span class="s2">&quot;/y_&quot;</span> <span class="o">+</span> <span class="n">split</span> <span class="o">+</span> <span class="s2">&quot;.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">labels_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">row</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">f</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">data</span><span class="p">,</span> <span class="n">labels</span></div>
 
 
-<div class="viewcode-block" id="load"><a class="viewcode-back" href="../api.html#database.load">[docs]</a><span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="n">standardized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">printSize</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="load"><a class="viewcode-back" href="../api.html#database.load">[docs]</a><span class="k">def</span> <span class="nf">load</span><span class="p">(</span>
+    <span class="n">standardized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">printSize</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">train_data_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">train_labels_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">test_data_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">test_labels_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get the dataset and the corresponding labels split</span>
 <span class="sd">    into a training and a testing set</span>
@@ -278,10 +291,18 @@
     <span class="n">download_dataset</span><span class="p">()</span>
 
     <span class="c1"># Get training data</span>
-    <span class="n">train_data</span><span class="p">,</span> <span class="n">train_labels</span> <span class="o">=</span> <span class="n">get_dataset_split</span><span class="p">(</span><span class="s2">&quot;train&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">train_data_path</span> <span class="ow">and</span> <span class="n">train_labels_path</span><span class="p">:</span>
+        <span class="n">train_data</span><span class="p">,</span> <span class="n">train_labels</span> <span class="o">=</span> <span class="n">get_dataset_split</span><span class="p">(</span><span class="n">train_data_path</span><span class="p">,</span> <span class="n">train_labels_path</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Custom Train Dataset loaded.&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">train_data</span><span class="p">,</span> <span class="n">train_labels</span> <span class="o">=</span> <span class="n">get_dataset_split</span><span class="p">(</span><span class="n">TRAIN_DATA</span><span class="p">,</span> <span class="n">TRAIN_LABELS</span><span class="p">)</span>
 
     <span class="c1"># Get testing data</span>
-    <span class="n">test_data</span><span class="p">,</span> <span class="n">test_labels</span> <span class="o">=</span> <span class="n">get_dataset_split</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">test_data_path</span> <span class="ow">and</span> <span class="n">test_labels_path</span><span class="p">:</span>
+        <span class="n">test_data</span><span class="p">,</span> <span class="n">test_labels</span> <span class="o">=</span> <span class="n">get_dataset_split</span><span class="p">(</span><span class="n">test_data_path</span><span class="p">,</span> <span class="n">test_labels_path</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Custom Test Dataset loaded.&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">test_data</span><span class="p">,</span> <span class="n">test_labels</span> <span class="o">=</span> <span class="n">get_dataset_split</span><span class="p">(</span><span class="n">TEST_DATA</span><span class="p">,</span> <span class="n">TEST_LABELS</span><span class="p">)</span>
 
     <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Dataset ready.&quot;</span><span class="p">)</span>
 
@@ -296,139 +317,6 @@
         <span class="n">train_data</span><span class="p">,</span> <span class="n">test_data</span> <span class="o">=</span> <span class="n">standardize</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span> <span class="n">test_data</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">train_data</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">,</span> <span class="n">test_data</span><span class="p">,</span> <span class="n">test_labels</span></div>
-
-
-<div class="viewcode-block" id="load_train"><a class="viewcode-back" href="../api.html#database.load_train">[docs]</a><span class="k">def</span> <span class="nf">load_train</span><span class="p">(</span><span class="n">standardized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">printSize</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Get the train dataset and the corresponding labels</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-
-<span class="sd">    standardized : bool</span>
-<span class="sd">        standardize the data before returning them or not</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-
-<span class="sd">    train_data : array</span>
-<span class="sd">        all the data of the custom dataset</span>
-<span class="sd">    train_labels: array</span>
-<span class="sd">        all the corresponding labels</span>
-
-
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Starting train dataset loading...&quot;</span><span class="p">)</span>
-
-    <span class="n">download_dataset</span><span class="p">()</span>
-
-    <span class="c1"># Get training data</span>
-    <span class="n">train_data</span><span class="p">,</span> <span class="n">train_labels</span> <span class="o">=</span> <span class="n">get_dataset_split</span><span class="p">(</span><span class="s2">&quot;train&quot;</span><span class="p">)</span>
-
-    <span class="c1"># Get testing data</span>
-    <span class="n">test_data</span><span class="p">,</span> <span class="n">test_labels</span> <span class="o">=</span> <span class="n">get_dataset_split</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
-
-    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Train Dataset ready.&quot;</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">printSize</span><span class="p">:</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;---Train samples: </span><span class="si">{</span><span class="n">train_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-    <span class="c1"># Standardization if required</span>
-    <span class="k">if</span> <span class="n">standardized</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">preprocessor</span> <span class="kn">import</span> <span class="n">standardize</span>
-
-        <span class="n">train_data</span><span class="p">,</span> <span class="n">test_data</span> <span class="o">=</span> <span class="n">standardize</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span> <span class="n">test_data</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">train_data</span><span class="p">,</span> <span class="n">train_labels</span></div>
-
-
-<div class="viewcode-block" id="load_test"><a class="viewcode-back" href="../api.html#database.load_test">[docs]</a><span class="k">def</span> <span class="nf">load_test</span><span class="p">(</span><span class="n">standardized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">printSize</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Get the test dataset and the corresponding labels</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-
-<span class="sd">    standardized : bool</span>
-<span class="sd">        standardize the data before returning them or not</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-
-<span class="sd">    test_data : array</span>
-<span class="sd">        all the test data of the dataset</span>
-<span class="sd">    test_labels: array</span>
-<span class="sd">        all the corresponding labels</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Starting test dataset loading...&quot;</span><span class="p">)</span>
-
-    <span class="n">download_dataset</span><span class="p">()</span>
-
-    <span class="c1"># Get testing data</span>
-    <span class="n">test_data</span><span class="p">,</span> <span class="n">test_labels</span> <span class="o">=</span> <span class="n">get_dataset_split</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
-
-    <span class="c1"># Get training data</span>
-    <span class="n">train_data</span><span class="p">,</span> <span class="n">train_labels</span> <span class="o">=</span> <span class="n">get_dataset_split</span><span class="p">(</span><span class="s2">&quot;train&quot;</span><span class="p">)</span>
-
-    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test Dataset ready.&quot;</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">printSize</span><span class="p">:</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;---Test samples: </span><span class="si">{</span><span class="n">test_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-    <span class="c1"># Standardization if required</span>
-    <span class="k">if</span> <span class="n">standardized</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">preprocessor</span> <span class="kn">import</span> <span class="n">standardize</span>
-
-        <span class="n">train_data</span><span class="p">,</span> <span class="n">test_data</span> <span class="o">=</span> <span class="n">standardize</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span> <span class="n">test_data</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">test_data</span><span class="p">,</span> <span class="n">test_labels</span></div>
-
-
-<div class="viewcode-block" id="load_custom_data"><a class="viewcode-back" href="../api.html#database.load_custom_data">[docs]</a><span class="k">def</span> <span class="nf">load_custom_data</span><span class="p">(</span><span class="nb">type</span><span class="p">,</span> <span class="n">data_path</span><span class="p">,</span> <span class="n">labels_path</span><span class="p">,</span> <span class="n">standardized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">printSize</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Get the custom dataset and the corresponding labels</span>
-<span class="sd">    from .txt files into a training and a testing set</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-
-<span class="sd">    type : string</span>
-<span class="sd">        type of the data to be loaded (train or test)</span>
-<span class="sd">    data_path : string</span>
-<span class="sd">        path to the .txt file containing the data </span>
-<span class="sd">    data_labels : string</span>
-<span class="sd">        path to the .txt file containing the labels</span>
-<span class="sd">    standardized : bool</span>
-<span class="sd">        standardize the data before returning them or not</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-
-<span class="sd">    data : array</span>
-<span class="sd">        all the data of the custom dataset</span>
-<span class="sd">    labels: array</span>
-<span class="sd">        all the corresponding labels</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Using custom &quot;</span> <span class="o">+</span> <span class="nb">type</span> <span class="o">+</span> <span class="s2">&quot; Dataset...&quot;</span><span class="p">)</span>
-
-    <span class="c1"># Load data</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">row</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;  &quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">f</span><span class="p">])</span>
-
-    <span class="c1"># Load labels</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">labels_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">row</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">f</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
-
-    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Custom &quot;</span> <span class="o">+</span> <span class="nb">type</span> <span class="o">+</span> <span class="s2">&quot; Dataset ready.&quot;</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">printSize</span><span class="p">:</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;---&quot;</span> <span class="o">+</span> <span class="nb">type</span> <span class="o">+</span> <span class="s2">&quot; samples: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
-
-    <span class="k">return</span> <span class="n">data</span><span class="p">,</span> <span class="n">labels</span></div>
 </pre></div>
 
            </div>
