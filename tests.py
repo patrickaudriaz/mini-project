@@ -98,6 +98,20 @@ def test_load(caplog):
     assert caplog.record_tuples[4][2] == "---Test samples: 2947"
     assert caplog.record_tuples[5][2] == "Dataset standardized."
 
+    # Save data for other tests
+    __, __, __, __ = database.load(
+        standardized=True,
+        printSize=True,
+        train_data_path="UCI HAR Dataset/train/X_train.txt",
+        train_labels_path="UCI HAR Dataset/train/y_train.txt",
+        test_data_path="UCI HAR Dataset/test/X_test.txt",
+        test_labels_path="UCI HAR Dataset/test/y_test.txt",
+    )
+
+    assert caplog.record_tuples[3][2] == "---Train samples: 7352"
+    assert caplog.record_tuples[4][2] == "---Test samples: 2947"
+    assert caplog.record_tuples[5][2] == "Dataset standardized."
+
 
 # ========================================================================
 
