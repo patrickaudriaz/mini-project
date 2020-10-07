@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+import sys
 import numpy as np
 import pytest
 from . import database
@@ -225,16 +226,13 @@ def test_get_args():
     assert args.output_folder == "results"
 
 
-"""
 def test_main_function(caplog):
     caplog.set_level(logging.INFO)
 
-    args = run.get_args(["-model", "rf"])
+    sys.argv = ["main", "-model", "rf", "-gridsearch", "n", "-output-folder", "results"]
 
-    run.main(args)
+    run.main()
 
     assert "Dataset ready." in caplog.messages
     assert "Training RF model..." in caplog.messages
     assert "Starting evaluation..." in caplog.messages
-"""
-
