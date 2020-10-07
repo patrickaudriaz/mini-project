@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,6 +11,11 @@
   
 
   
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+
+  
   
     <link rel="shortcut icon" href="_static/favicon.ico"/>
   
@@ -19,7 +23,9 @@
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -31,11 +37,6 @@
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="Troubleshooting" href="troubleshooting.html" /> 
@@ -52,7 +53,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> Activities recognition
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> Activities recognition
           
 
           
@@ -82,6 +83,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -94,10 +96,10 @@
 <li class="toctree-l1"><a class="reference internal" href="guide.html">User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Python API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#module-database">Database</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-preprocessor">Pre-processor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-algorithm">Machine Learning Algorithm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-evaluator">Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#database">Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pre-processor">Pre-processor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#machine-learning-algorithm">Machine Learning Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#analysis">Analysis</a></li>
 </ul>
 </li>
 </ul>
@@ -105,6 +107,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -143,7 +146,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li>Python API</li>
     
@@ -166,204 +169,17 @@
             
   <div class="section" id="python-api">
 <h1>Python API<a class="headerlink" href="#python-api" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="module-database">
-<span id="database"></span><h2>Database<a class="headerlink" href="#module-database" title="Permalink to this headline">¶</a></h2>
-<dl class="py function">
-<dt id="database.download_dataset">
-<code class="sig-prename descclassname">database.</code><code class="sig-name descname">download_dataset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#download_dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#database.download_dataset" title="Permalink to this definition">¶</a></dt>
-<dd><p>Download raw dataset from url and unzip it</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="database.transform_to_text_labels">
-<code class="sig-prename descclassname">database.</code><code class="sig-name descname">transform_to_text_labels</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">labels</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#transform_to_text_labels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#database.transform_to_text_labels" title="Permalink to this definition">¶</a></dt>
-<dd><p>Transform numerical labels to corresponding text</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>labels</strong> (<em>array</em>) – an array of numerical labels</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>labels</strong> – same array with corresponding text labels</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>array</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="database.get_dataset_split">
-<code class="sig-prename descclassname">database.</code><code class="sig-name descname">get_dataset_split</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data_path</span></em>, <em class="sig-param"><span class="n">labels_path</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#get_dataset_split"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#database.get_dataset_split" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get data and ground-truth of selected split</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>data_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – data file location</p></li>
-<li><p><strong>labels_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – labels file location</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><ul class="simple">
-<li><p><strong>data</strong> (<em>array</em>) – all the data of the split</p></li>
-<li><p><strong>labels</strong> (<em>array</em>) – all the corresponding labels (ground-truth)</p></li>
-</ul>
-</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="database.load">
-<code class="sig-prename descclassname">database.</code><code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">standardized</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">printSize</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">train_data_path</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">train_labels_path</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">test_data_path</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">test_labels_path</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#database.load" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the dataset and the corresponding labels split
-into a training and a testing set</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>standardized</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – standardize the data before returning them or not</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><ul class="simple">
-<li><p><strong>train_data</strong> (<em>array</em>)</p></li>
-<li><p><strong>train_labels</strong> (<em>array</em>)</p></li>
-<li><p><strong>test_data</strong> (<em>array</em>)</p></li>
-<li><p><strong>test_labels</strong> (<em>array</em>)</p></li>
-</ul>
-</p>
-</dd>
-</dl>
-</dd></dl>
-
+<div class="section" id="database">
+<h2>Database<a class="headerlink" href="#database" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-preprocessor">
-<span id="pre-processor"></span><h2>Pre-processor<a class="headerlink" href="#module-preprocessor" title="Permalink to this headline">¶</a></h2>
-<dl class="py function">
-<dt id="preprocessor.standardize">
-<code class="sig-prename descclassname">preprocessor.</code><code class="sig-name descname">standardize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">train_data</span></em>, <em class="sig-param"><span class="n">test_data</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/preprocessor.html#standardize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#preprocessor.standardize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Standardize training and testing data</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>train_data</strong> (<em>array</em>) – Data on which to calculate the standardization parameters.
-The standardization is also applied on this subset.</p></li>
-<li><p><strong>test_data</strong> (<em>array</em>) – Test subset on which to apply the standardization.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><ul class="simple">
-<li><p><strong>train_data</strong> (<em>array</em>) – Standardized training data</p></li>
-<li><p><strong>test_data</strong> (<em>array</em>) – Standardized testing data</p></li>
-</ul>
-</p>
-</dd>
-</dl>
-</dd></dl>
-
+<div class="section" id="pre-processor">
+<h2>Pre-processor<a class="headerlink" href="#pre-processor" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-algorithm">
-<span id="machine-learning-algorithm"></span><h2>Machine Learning Algorithm<a class="headerlink" href="#module-algorithm" title="Permalink to this headline">¶</a></h2>
-<dl class="py function">
-<dt id="algorithm.train">
-<code class="sig-prename descclassname">algorithm.</code><code class="sig-name descname">train</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">Y</span></em>, <em class="sig-param"><span class="n">args</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/algorithm.html#train"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#algorithm.train" title="Permalink to this definition">¶</a></dt>
-<dd><p>Train a model given the arguments, the dataset and
-the corresponding labels (ground-truth)</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>X</strong> (<em>array</em>) – features of the dataset</p></li>
-<li><p><strong>Y</strong> (<em>array</em>) – corresponding labels</p></li>
-<li><p><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a>) – arguments to prepare the model</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>model</strong> – trained model</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)">object</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="algorithm.predict">
-<code class="sig-prename descclassname">algorithm.</code><code class="sig-name descname">predict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">model</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/algorithm.html#predict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#algorithm.predict" title="Permalink to this definition">¶</a></dt>
-<dd><p>Predict labels given the features and the trained model</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>X</strong> (<em>array</em>) – features to predict on</p></li>
-<li><p><strong>model</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><em>object</em></a>) – trained model</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>predictions</strong> – Array with the predicted labels</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>array</p>
-</dd>
-</dl>
-</dd></dl>
-
+<div class="section" id="machine-learning-algorithm">
+<h2>Machine Learning Algorithm<a class="headerlink" href="#machine-learning-algorithm" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-evaluator">
-<span id="analysis"></span><h2>Analysis<a class="headerlink" href="#module-evaluator" title="Permalink to this headline">¶</a></h2>
-<dl class="py function">
-<dt id="evaluator.get_metrics_table">
-<code class="sig-prename descclassname">evaluator.</code><code class="sig-name descname">get_metrics_table</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">predictions</span></em>, <em class="sig-param"><span class="n">test_labels</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/evaluator.html#get_metrics_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#evaluator.get_metrics_table" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate a metrics table to evaluate predictions</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>predictions</strong> (<em>array</em>) – Predictions of a model</p></li>
-<li><p><strong>test_labels</strong> (<em>array</em>) – Corresponding ground-truth</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>table</strong> – Nicely formatted plain-text table with the computed metrics</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>string</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="evaluator.get_table_header">
-<code class="sig-prename descclassname">evaluator.</code><code class="sig-name descname">get_table_header</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model_name</span></em>, <em class="sig-param"><span class="n">model</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/evaluator.html#get_table_header"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#evaluator.get_table_header" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate a header for the metrics table</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>model_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Type of model (svm or rf)</p></li>
-<li><p><strong>model</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><em>object</em></a>) – Trained model from which to get the parameters</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>header</strong> – Nicely formatted text header</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>string</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="evaluator.evaluate">
-<code class="sig-prename descclassname">evaluator.</code><code class="sig-name descname">evaluate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">predictions</span></em>, <em class="sig-param"><span class="n">test_data</span></em>, <em class="sig-param"><span class="n">test_labels</span></em>, <em class="sig-param"><span class="n">output_dir</span></em>, <em class="sig-param"><span class="n">model_name</span></em>, <em class="sig-param"><span class="n">model</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/evaluator.html#evaluate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#evaluator.evaluate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluate the predictions given the ground-truth. Save a table with
-the metrics and a png file with the confusion matrix.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>predictions</strong> (<em>array</em>) – Predictions of a model</p></li>
-<li><p><strong>test_labels</strong> (<em>array</em>) – Corresponding ground-truth</p></li>
-<li><p><strong>output_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Folder name in which to save table and figure</p></li>
-<li><p><strong>model_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Model type (svm or rf)</p></li>
-<li><p><strong>model</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><em>object</em></a>) – trained model</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
+<div class="section" id="analysis">
+<h2>Analysis<a class="headerlink" href="#analysis" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -385,11 +201,19 @@ the metrics and a png file with the confusion matrix.</p>
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -400,7 +224,6 @@ the metrics and a png file with the confusion matrix.</p>
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {
