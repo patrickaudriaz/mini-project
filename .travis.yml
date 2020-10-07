@@ -8,7 +8,7 @@ install:
   
 script:
   - rrgp-run  #test if the cmdline app runs at least
-  - python -m pytest --cov=./ -v --pyargs rrgp.tests #runs test
+  - python -m pytest --cov=./rrgp/ -v --pyargs rrgp.tests #runs test
   - sphinx-build -b doctest doc sphinx
   - sphinx-build doc sphinx
   - touch sphinx/.nojekyll
