@@ -6,15 +6,17 @@ import argparse
 import logging
 import sys
 
-import database
-import algorithm
+from . import database
+from . import algorithm
 import argparse
-import evaluator
+from . import evaluator
 
 logging.basicConfig(level=logging.INFO)
 
 
-def main(args):
+def main():
+    args = get_args()
+    logging.info(f"Using arguments: {args}")
 
     # Load data and ground-truth
     train_data, train_labels, test_data, test_labels = database.load(
@@ -107,7 +109,4 @@ def get_args(args=None):
 
 
 if __name__ == "__main__":
-    args = get_args()
-    logging.info(f"Using arguments: {args}")
-
-    main(args)
+    main()

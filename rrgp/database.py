@@ -154,7 +154,7 @@ def load(
 
     # Standardization if required
     if standardized:
-        from preprocessor import standardize
+        from .preprocessor import standardize
 
         train_data, test_data = standardize(train_data, test_data)
 

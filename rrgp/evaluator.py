@@ -7,7 +7,7 @@ import os
 import logging
 import numpy as np
 import matplotlib.pyplot as plt
-from database import transform_to_text_labels
+from .database import transform_to_text_labels
 from sklearn.utils.multiclass import unique_labels
 from sklearn.metrics import (
     precision_score,

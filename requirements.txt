@@ -3,9 +3,9 @@
 # $ conda create -y -q --name <env> --file <this file>
 # $ conda activate <env>
 #
+setuptools
 numpy==1.19.1
 pandas==1.1.1
-python==3.8.1
 tabulate==0.8.7
 scikit-learn==0.23.2
 matplotlib==3.3.1
