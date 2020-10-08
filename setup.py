@@ -11,7 +11,7 @@ def load_requirements(f):
 
 setup(
     name="rrgp",
-    version="1.0.5",
+    version="1.0.6",
     description="This project aims to train a model to recognise human activities (like walking, standing, or sitting) based on accelerometer and gyroscope data collected with a smartphone.",
     url="https://github.com/patrickaudriaz/mini-project",
     license="MIT",
