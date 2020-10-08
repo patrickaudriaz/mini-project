@@ -7,7 +7,7 @@ install:
   - pip install -r build-requirements.txt
   
 script:
-  - rrgp-run  #test if the cmdline app runs at least
+  - rrgp  #test if the cmdline app runs at least
   - python -m pytest --cov=./rrgp/ -v --pyargs rrgp.tests #runs test
   - sphinx-build -b doctest doc sphinx
   - sphinx-build doc sphinx
