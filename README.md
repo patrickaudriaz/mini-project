@@ -4,6 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/patrickaudriaz/mini-project/badge.svg)](https://coveralls.io/github/patrickaudriaz/mini-project)
 [![Generic badge](https://img.shields.io/badge/doc-latest-orange.svg)](https://patrickaudriaz.github.io/mini-project/)
 [![GitHub release](https://img.shields.io/github/v/release/patrickaudriaz/mini-project)](https://github.com/patrickaudriaz/mini-project/releases/latest)
+[![](https://img.shields.io/pypi/v/badge.svg?maxAge=3600)](https://pypi.org/project/rrgp/)
 [![Generic badge](https://img.shields.io/badge/github-project-purple.svg)](https://github.com/patrickaudriaz/mini-project)
 [![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT)
 
