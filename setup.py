@@ -22,7 +22,7 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     install_requires=load_requirements("requirements.txt"),
-    entry_points={"console_scripts": ["rrgp-run = rrgp.run:main"]},
+    entry_points={"console_scripts": ["rrgp = rrgp.run:main"]},
     classifiers=[
         "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
