@@ -24,7 +24,6 @@ deploy:
       branch: master
       condition: $TRAVIS_PYTHON_VERSION = 3.8
   - provider: pypi
-    server: https://test.pypi.org/legacy/ # Remove to deployment on pypi.org
     username: "__token__"
     password:
       secure: WTqURFxTip29+PXNQIO9byPFEXCMHn9cO9igrfFOSCzleRbTvHPXpoGbvDiGRlPXKjCMCCt73VMW0OxmddjIVxu9NbZ6SRckwuFaIJ8TlLpDapeLJO0npOxmXdK4+1SDFpgzEwc9OaKvZdV5QDXlCiQipJmfhDYqOwEgnJkslZUpk786ju1jyrLu7yu3mvelDdSl4CBr1q/nqLZsyofMIn5r4OwE56IR0Ir7PDncLVL8Gc37JX4myp0/fy9bgmx6SiujIBZkWsXGiB9fb8mlSf+vWdEnE7AAVL43hstkApaA1S/ohIQk+d8wsb8kHkaRSVMbje4CWJ0+MFEh16Wcz9Ni3mXyNO73mPUu8pGipDsl+p0mZe6iRe288XLZ2tOlD4hcyCiUgwUi8J4D3ta795oOptY/+gRBbiB71pgsnm02Oce4eSIXM5SWA7WgzZbhBIAnvHu8xlVYNiifFl9giCr7ebO/qjMQXSoAXB/kPOkgVSew1FZUXCPPwRXXHJzduqxSos0SDyrvksqCoHX/kdc1iutn8lzLBwtCnKQWmUYUyfMex7D5vI32VlYyZz4XW5AgFVlgFY3qxTKZ+vbfssvAiPXvaQtTRwy3GmnNZwqLh/kAiPm6fPQkqsu6YLC58nHiFlQXYVVOEbwT4+vOOgvsaae5vdn0RmzYNqCDIK0=

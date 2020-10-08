@@ -86,7 +86,7 @@ import time
 # copyright = u"%s, Idiap Research Institute" % time.strftime("%Y")
 
 # Grab the setup entry
-distribution = "1.0.1"
+distribution = "1.0.5"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
