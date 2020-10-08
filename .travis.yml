@@ -28,5 +28,5 @@ deploy:
     password:
       secure: WrK6TXbPT34g7SDHmNgSfVb7vvDoDoFrd0I86rMjF4eQaeA0jjaOXLAL17sZtFDIZJ3/Dq8OWVA9qU23d0O2x73ZOqGwvjwNAH7D6fhQaWd5N26DvXKYlTpr/z/VcajPRmEtHJqo6x/DhbhPdMglAmW8Elmgx7EFV9dmVtCj9UuQCIcfyDX8R4XSOZTJguT/MWegsEOqPSggvN+LVq5c9FyTmeXDYi9IerZlL4LNnhnU67JApZelmho/SRxqAe5tYX/g9+JC8L/UwmpiErvbKfiSAWRSzdZZQZq6LgQqr9pWXCCMjh0vkMMraUtHukWmwKu/+cdFFLu1LBDPS0Zzc1LCA4tMcEYFJ8afIK6cmJT8t90J7Mf7ThDten0hEqEQzCFKGUSuRSma6ytT4KyTyXQM8AlSW1M8Z8ecGYymWcmiNie6B5UdzVJMZBysXjqbTx3kTe47Kg3/CPJs1Qc/qcgJvBqi6iOBaaO/c4W838b6pLkkDAmxjJze1mnXh09TOwxJLeKa5pB+FsfHYcomHfeSUimVfLyhmum+FPYHPOlHidMK7IjPpkPDC5FdxZjsJkpiZoC6i2nHliqKi9yKnYgX3jPvE6KYnzgUgIijnMuzlW3CUbSqhSjCepFYwsqxZf5cRv4fx83LT4AM/MVMbu1toXGAvexYaIQWAVRNeMc=
     on:
-      branch: master
+      tags: true
       condition: "$TRAVIS_PYTHON_VERSION = 3.8"
