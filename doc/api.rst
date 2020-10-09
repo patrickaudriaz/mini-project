@@ -8,25 +8,25 @@
 Database
 --------
 
-.. automodule:: database
+.. automodule:: rrgp.database
    :members:
 
 
 Pre-processor
 -------------
 
-.. automodule:: preprocessor
+.. automodule:: rrgp.preprocessor
    :members:
 
 
 Machine Learning Algorithm
 --------------------------
 
-.. automodule:: algorithm
+.. automodule:: rrgp.algorithm
    :members:
 
 Analysis
 --------
 
-.. automodule:: evaluator
+.. automodule:: rrgp.evaluator
    :members:

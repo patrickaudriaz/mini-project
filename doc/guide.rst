@@ -12,7 +12,11 @@ but you can also use the gridsearch option to find new parameters. The analysis
 results will be saved by default in a *results* folder but you can also use
 the dedicated parameter to customize it.
 
-Here are two examples of commands you can use::
+Code installed from Github
+--------------------------
+
+Here are two examples of commands you can use if you installed the code
+from Github::
 
     # Train an SVM with predefined parameters and save the analysis 
     # in the "analysis_results" folder
@@ -21,6 +25,20 @@ Here are two examples of commands you can use::
     # Train a random forest with gridsearch and save the analysis in 
     # the "results" folder
     (activities) $ python run.py -model rf -gridsearch y -output-folder results
+
+Package installed from PyPI
+---------------------------
+
+Here are two examples of commands you can use if you installed the package
+from PyPI::
+
+    # Train an SVM with predefined parameters and save the analysis 
+    # in the "analysis_results" folder
+    $ rrgp -model svm -gridsearch n -output-folder analysis_results
+
+    # Train a random forest with gridsearch and save the analysis in 
+    # the "results" folder
+    $ rrgp -model rf -gridsearch y -output-folder results
 
 For your reference, our tables and figures are repeated below, so you can 
 check the reproducibility of our solution.
@@ -87,6 +105,13 @@ Here is an examples of command you can use to load a custom dataset::
   # Train an SVM with predefined parameters and use custom train data
   # and custom test data
   (activities) $ python run.py -model svm -gridsearch n -train-data data/X_train.txt -train-labels data/y_train.txt -test-data data/X_test.txt -test-labels data/y_test.txt
+
+Or if you installed the package from PyPI::
+
+  # Train an SVM with predefined parameters and use custom train data
+  # and custom test data
+  $ rrgp -model svm -gridsearch n -train-data data/X_train.txt -train-labels data/y_train.txt -test-data data/X_test.txt -test-labels data/y_test.txt
+
 
 **Dataset Formatting**
 

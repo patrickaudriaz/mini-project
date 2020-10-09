@@ -18,12 +18,20 @@ This package performs multiple tasks sequentially:
 4. Evaluate the performances and save the analysis in the output folder
 
 To run the script using the default configuration just follow the 
-:ref:`activities_installation` and use the following command::
-
-   (activities) $ python run.py
+:ref:`activities_installation` and use one of the following commands.
 
 It will train an svm model using predefined parameters and save the analysis
 in a *results* folder.
+
+Installed from Github
+---------------------
+
+   (activities) $ python run.py
+
+Installed from PyPI
+---------------------
+
+   $ rrgp
 
 Documentation
 -------------
