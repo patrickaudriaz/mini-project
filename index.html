@@ -174,18 +174,33 @@ sensors.</p>
 <li><p>Evaluate the performances and save the analysis in the output folder</p></li>
 </ol>
 <p>To run the script using the default configuration just follow the
-<a class="reference internal" href="installation.html#activities-installation"><span class="std std-ref">Installation</span></a> and use the following command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(activities) $ python run.py
-</pre></div>
-</div>
+<a class="reference internal" href="installation.html#activities-installation"><span class="std std-ref">Installation</span></a> and use one of the following commands.</p>
 <p>It will train an svm model using predefined parameters and save the analysis
 in a <em>results</em> folder.</p>
+<div class="section" id="installed-from-github">
+<h2>Installed from Github<a class="headerlink" href="#installed-from-github" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>(activities) $ python run.py</p>
+</div></blockquote>
+</div>
+<div class="section" id="installed-from-pypi">
+<h2>Installed from PyPI<a class="headerlink" href="#installed-from-pypi" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>$ rrgp</p>
+</div></blockquote>
+</div>
 <div class="section" id="documentation">
 <h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#using-github">Using Github</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#using-pypi">Using PyPI</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="guide.html">User Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="guide.html#code-installed-from-github">Code installed from Github</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide.html#package-installed-from-pypi">Package installed from PyPI</a></li>
 <li class="toctree-l2"><a class="reference internal" href="guide.html#results-with-the-svm-model">Results with the SVM model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="guide.html#results-with-the-random-forest-model">Results with the random forest model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="guide.html#customizing-the-parameters">Customizing the parameters</a></li>
@@ -195,10 +210,10 @@ in a <em>results</em> folder.</p>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">Python API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api.html#database">Database</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#pre-processor">Pre-processor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#machine-learning-algorithm">Machine Learning Algorithm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#analysis">Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-rrgp.database">Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-rrgp.preprocessor">Pre-processor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-rrgp.algorithm">Machine Learning Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-rrgp.evaluator">Analysis</a></li>
 </ul>
 </li>
 </ul>
