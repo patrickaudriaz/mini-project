@@ -3,7 +3,11 @@
 .. _activities_installation:
 
 
-Installation
+==============
+ Installation
+==============
+
+Using Github
 ------------
 
 This package depends on multiple packages to run properly. Please install the
@@ -19,5 +23,15 @@ To download a copy of this package, clone it from its repository in GitHub:
    $ conda create --name activities --file requirements.txt
    $ conda activate activities
    (activities) $ #you are ready to run baselines!
+
+Using PyPI
+----------
+
+If you want to install the already packaged code, please follow this procedure:
+
+.. code:: sh
+
+   $ pip install rrgp
+   $ #you are ready to run baselines!
 
 .. include:: links.rst
