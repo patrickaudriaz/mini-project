@@ -32,9 +32,6 @@ This repository is made publicly available under the [MIT License](https://opens
 - [Geoffrey Raposo](https://github.com/ge0ra)
 - [Patrick Audriaz](https://patrick-audriaz.com/)
 
-[![Generic badge](https://img.shields.io/badge/github-project-purple.svg)](https://github.com/patrickaudriaz/mini-project)
-[![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT)
-
 
 This project aims to train a model to recognise human activities (like walking, 
 standing, or sitting) based on accelerometer and gyroscope data collected with 
